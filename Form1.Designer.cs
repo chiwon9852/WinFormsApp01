@@ -35,6 +35,8 @@
             tabPage3 = new TabPage();
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
+            tabPage6 = new TabPage();
+            tabPage7 = new TabPage();
             uiTabControlMenu1.SuspendLayout();
             SuspendLayout();
             // 
@@ -46,6 +48,8 @@
             uiTabControlMenu1.Controls.Add(tabPage3);
             uiTabControlMenu1.Controls.Add(tabPage4);
             uiTabControlMenu1.Controls.Add(tabPage5);
+            uiTabControlMenu1.Controls.Add(tabPage6);
+            uiTabControlMenu1.Controls.Add(tabPage7);
             uiTabControlMenu1.DrawMode = TabDrawMode.OwnerDrawFixed;
             uiTabControlMenu1.Font = new Font("Microsoft Sans Serif", 12F);
             uiTabControlMenu1.Location = new Point(0, 0);
@@ -77,7 +81,7 @@
             tabPage2.Name = "tabPage2";
             tabPage2.Size = new Size(602, 453);
             tabPage2.TabIndex = 1;
-            tabPage2.Text = "User Account";
+            tabPage2.Text = "Customer";
             tabPage2.UseVisualStyleBackColor = true;
             // 
             // tabPage3
@@ -86,7 +90,7 @@
             tabPage3.Name = "tabPage3";
             tabPage3.Size = new Size(602, 453);
             tabPage3.TabIndex = 2;
-            tabPage3.Text = "Supplier";
+            tabPage3.Text = "Loan";
             tabPage3.UseVisualStyleBackColor = true;
             // 
             // tabPage4
@@ -95,7 +99,7 @@
             tabPage4.Name = "tabPage4";
             tabPage4.Size = new Size(602, 453);
             tabPage4.TabIndex = 3;
-            tabPage4.Text = "Purchase";
+            tabPage4.Text = "Payment";
             tabPage4.UseVisualStyleBackColor = true;
             // 
             // tabPage5
@@ -106,6 +110,24 @@
             tabPage5.TabIndex = 4;
             tabPage5.Text = "Reports";
             tabPage5.UseVisualStyleBackColor = true;
+            // 
+            // tabPage6
+            // 
+            tabPage6.Location = new Point(201, 0);
+            tabPage6.Name = "tabPage6";
+            tabPage6.Size = new Size(602, 453);
+            tabPage6.TabIndex = 5;
+            tabPage6.Text = "user";
+            tabPage6.UseVisualStyleBackColor = true;
+            // 
+            // tabPage7
+            // 
+            tabPage7.Location = new Point(201, 0);
+            tabPage7.Name = "tabPage7";
+            tabPage7.Size = new Size(602, 453);
+            tabPage7.TabIndex = 6;
+            tabPage7.Text = "Setting";
+            tabPage7.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
@@ -128,5 +150,7 @@
         private TabPage tabPage3;
         private TabPage tabPage4;
         private TabPage tabPage5;
+        private TabPage tabPage6;
+        private TabPage tabPage7;
     }
 }
