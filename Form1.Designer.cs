@@ -63,7 +63,7 @@
             uiTabControlMenu1.TabIndex = 0;
             uiTabControlMenu1.TabSelectedColor = Color.GhostWhite;
             uiTabControlMenu1.TabSelectedForeColor = Color.Maroon;
-            uiTabControlMenu1.TabSelectedHighColor = Color.Firebrick;
+            uiTabControlMenu1.TabSelectedHighColor = Color.Transparent;
             uiTabControlMenu1.TabUnSelectedForeColor = Color.WhiteSmoke;
             // 
             // tabPage1
