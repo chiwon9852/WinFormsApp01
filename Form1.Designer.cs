@@ -55,12 +55,12 @@
             uiTabControlMenu1.SelectedIndex = 0;
             uiTabControlMenu1.Size = new Size(803, 453);
             uiTabControlMenu1.SizeMode = TabSizeMode.Fixed;
-            uiTabControlMenu1.TabBackColor = Color.Plum;
+            uiTabControlMenu1.TabBackColor = Color.Maroon;
             uiTabControlMenu1.TabIndex = 0;
-            uiTabControlMenu1.TabSelectedColor = Color.Purple;
-            uiTabControlMenu1.TabSelectedForeColor = Color.FromArgb(224, 224, 224);
-            uiTabControlMenu1.TabSelectedHighColor = Color.MediumOrchid;
-            uiTabControlMenu1.TabUnSelectedForeColor = Color.Black;
+            uiTabControlMenu1.TabSelectedColor = Color.GhostWhite;
+            uiTabControlMenu1.TabSelectedForeColor = Color.Maroon;
+            uiTabControlMenu1.TabSelectedHighColor = Color.Firebrick;
+            uiTabControlMenu1.TabUnSelectedForeColor = Color.WhiteSmoke;
             // 
             // tabPage1
             // 
