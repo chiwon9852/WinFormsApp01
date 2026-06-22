@@ -106,10 +106,12 @@
             // 
             // uiBtnLogin
             // 
+            uiBtnLogin.FillColor = Color.Maroon;
             uiBtnLogin.Font = new Font("Microsoft Sans Serif", 12F);
             uiBtnLogin.Location = new Point(310, 296);
             uiBtnLogin.MinimumSize = new Size(1, 1);
             uiBtnLogin.Name = "uiBtnLogin";
+            uiBtnLogin.RectColor = Color.FromArgb(64, 0, 0);
             uiBtnLogin.Size = new Size(125, 44);
             uiBtnLogin.TabIndex = 3;
             uiBtnLogin.Text = "LOG IN";
@@ -124,6 +126,7 @@
             USER_PWD.MinimumSize = new Size(1, 16);
             USER_PWD.Name = "USER_PWD";
             USER_PWD.Padding = new Padding(5);
+            USER_PWD.RectColor = Color.Maroon;
             USER_PWD.ShowText = false;
             USER_PWD.Size = new Size(304, 36);
             USER_PWD.TabIndex = 3;
@@ -138,6 +141,7 @@
             USER_NAME.MinimumSize = new Size(1, 16);
             USER_NAME.Name = "USER_NAME";
             USER_NAME.Padding = new Padding(5);
+            USER_NAME.RectColor = Color.Maroon;
             USER_NAME.ShowText = false;
             USER_NAME.Size = new Size(304, 36);
             USER_NAME.TabIndex = 2;
