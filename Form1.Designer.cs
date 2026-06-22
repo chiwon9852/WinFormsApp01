@@ -37,7 +37,9 @@
             tabPage5 = new TabPage();
             tabPage6 = new TabPage();
             tabPage7 = new TabPage();
+            uiLabel1 = new Sunny.UI.UILabel();
             uiTabControlMenu1.SuspendLayout();
+            tabPage1.SuspendLayout();
             SuspendLayout();
             // 
             // uiTabControlMenu1
@@ -68,6 +70,7 @@
             // 
             // tabPage1
             // 
+            tabPage1.Controls.Add(uiLabel1);
             tabPage1.Location = new Point(201, 0);
             tabPage1.Name = "tabPage1";
             tabPage1.Size = new Size(602, 453);
@@ -129,6 +132,16 @@
             tabPage7.Text = "Setting";
             tabPage7.UseVisualStyleBackColor = true;
             // 
+            // uiLabel1
+            // 
+            uiLabel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLabel1.ForeColor = Color.FromArgb(48, 48, 48);
+            uiLabel1.Location = new Point(8, 8);
+            uiLabel1.Name = "uiLabel1";
+            uiLabel1.Size = new Size(125, 29);
+            uiLabel1.TabIndex = 0;
+            uiLabel1.Text = "uiLabel1";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -139,6 +152,7 @@
             Name = "Form1";
             Text = "Micro Loan Managermenet System";
             uiTabControlMenu1.ResumeLayout(false);
+            tabPage1.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -152,5 +166,6 @@
         private TabPage tabPage5;
         private TabPage tabPage6;
         private TabPage tabPage7;
+        private Sunny.UI.UILabel uiLabel1;
     }
 }
