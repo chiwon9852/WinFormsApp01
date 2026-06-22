@@ -63,7 +63,7 @@
             uiTabControlMenu1.TabIndex = 0;
             uiTabControlMenu1.TabSelectedColor = Color.GhostWhite;
             uiTabControlMenu1.TabSelectedForeColor = Color.Maroon;
-            uiTabControlMenu1.TabSelectedHighColor = Color.Transparent;
+            uiTabControlMenu1.TabSelectedHighColor = Color.Firebrick;
             uiTabControlMenu1.TabUnSelectedForeColor = Color.WhiteSmoke;
             // 
             // tabPage1
@@ -117,7 +117,7 @@
             tabPage6.Name = "tabPage6";
             tabPage6.Size = new Size(602, 453);
             tabPage6.TabIndex = 5;
-            tabPage6.Text = "user";
+            tabPage6.Text = "User";
             tabPage6.UseVisualStyleBackColor = true;
             // 
             // tabPage7
