@@ -23,9 +23,9 @@ namespace WinFormsApp01
         tpuser_acc,    // Index 1 (បងមើលឈ្មោះក្នុងរូបថត: tpuser_acc)
         tpCustomer,    // Index 2 (បងមើលឈ្មោះក្នុងរូបថត: tpCustomer)
         tpLaon,        // Index 3
-        tpPayment,     // Index 4
+        tpRepayment,     // Index 4
         tpReports,     // Index 5
-        tpUser,        // Index 6
+        tpPI,        // Index 6
         tpSetting      // Index 7
         };
 
@@ -185,5 +185,10 @@ namespace WinFormsApp01
 
         private void tpLogin_Click(object sender, EventArgs e) { }
         private void tpuser_acc_Click(object sender, EventArgs e) { }
+
+        private void tprepay_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

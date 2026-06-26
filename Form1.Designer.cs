@@ -29,13 +29,11 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            uiTabControlMenu1 = new Sunny.UI.UITabControlMenu();
-            tpLogin = new TabPage();
-            uiBtnLogin = new Sunny.UI.UIButton();
-            USER_PWD = new Sunny.UI.UITextBox();
-            USER_NAME = new Sunny.UI.UITextBox();
-            uiLblPWD = new Sunny.UI.UILabel();
-            uiLblUSER_NAME = new Sunny.UI.UILabel();
+            tpSetting = new TabPage();
+            tpPI = new TabPage();
+            tpReports = new TabPage();
+            tpLaon = new TabPage();
+            tpCustomer = new TabPage();
             tpuser_acc = new TabPage();
             uiBtnview = new Sunny.UI.UIButton();
             uiBtndelete = new Sunny.UI.UIButton();
@@ -51,123 +49,75 @@
             txtEmpName = new Sunny.UI.UILabel();
             txtNewPass = new Sunny.UI.UILabel();
             txtNewUser = new Sunny.UI.UILabel();
-            tpCustomer = new TabPage();
-            tpLaon = new TabPage();
-            tpPayment = new TabPage();
-            tpReports = new TabPage();
-            tpUser = new TabPage();
-            tpSetting = new TabPage();
-            uiTabControlMenu1.SuspendLayout();
-            tpLogin.SuspendLayout();
+            tpLogin = new TabPage();
+            uiBtnLogin = new Sunny.UI.UIButton();
+            USER_PWD = new Sunny.UI.UITextBox();
+            USER_NAME = new Sunny.UI.UITextBox();
+            uiLblPWD = new Sunny.UI.UILabel();
+            uiLblUSER_NAME = new Sunny.UI.UILabel();
+            uiTabControlMenu1 = new Sunny.UI.UITabControlMenu();
+            tpRP = new TabPage();
+            uiTextBox1 = new Sunny.UI.UITextBox();
+            uiTextBox2 = new Sunny.UI.UITextBox();
+            uiTextBox3 = new Sunny.UI.UITextBox();
+            uiTextBox4 = new Sunny.UI.UITextBox();
+            uiTextBox5 = new Sunny.UI.UITextBox();
+            BtnSearch = new Sunny.UI.UIButton();
+            uiButton2 = new Sunny.UI.UIButton();
+            uiLabel1 = new Sunny.UI.UILabel();
+            uiLabel2 = new Sunny.UI.UILabel();
+            uiLabel3 = new Sunny.UI.UILabel();
+            uiLabel4 = new Sunny.UI.UILabel();
             tpuser_acc.SuspendLayout();
+            tpLogin.SuspendLayout();
+            uiTabControlMenu1.SuspendLayout();
+            tpRP.SuspendLayout();
             SuspendLayout();
             // 
-            // uiTabControlMenu1
+            // tpSetting
             // 
-            uiTabControlMenu1.Alignment = TabAlignment.Left;
-            uiTabControlMenu1.Controls.Add(tpLogin);
-            uiTabControlMenu1.Controls.Add(tpuser_acc);
-            uiTabControlMenu1.Controls.Add(tpCustomer);
-            uiTabControlMenu1.Controls.Add(tpLaon);
-            uiTabControlMenu1.Controls.Add(tpPayment);
-            uiTabControlMenu1.Controls.Add(tpReports);
-            uiTabControlMenu1.Controls.Add(tpUser);
-            uiTabControlMenu1.Controls.Add(tpSetting);
-            uiTabControlMenu1.DrawMode = TabDrawMode.OwnerDrawFixed;
-            uiTabControlMenu1.Font = new Font("Microsoft Sans Serif", 12F);
-            uiTabControlMenu1.Location = new Point(0, 0);
-            uiTabControlMenu1.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
-            uiTabControlMenu1.Multiline = true;
-            uiTabControlMenu1.Name = "uiTabControlMenu1";
-            uiTabControlMenu1.SelectedIndex = 0;
-            uiTabControlMenu1.Size = new Size(803, 453);
-            uiTabControlMenu1.SizeMode = TabSizeMode.Fixed;
-            uiTabControlMenu1.TabBackColor = Color.Maroon;
-            uiTabControlMenu1.TabIndex = 0;
-            uiTabControlMenu1.TabSelectedColor = Color.GhostWhite;
-            uiTabControlMenu1.TabSelectedForeColor = Color.Maroon;
-            uiTabControlMenu1.TabSelectedHighColor = Color.Transparent;
-            uiTabControlMenu1.TabUnSelectedForeColor = Color.WhiteSmoke;
+            tpSetting.Location = new Point(201, 0);
+            tpSetting.Name = "tpSetting";
+            tpSetting.Size = new Size(602, 453);
+            tpSetting.TabIndex = 6;
+            tpSetting.Text = "Setting";
+            tpSetting.UseVisualStyleBackColor = true;
             // 
-            // tpLogin
+            // tpPI
             // 
-            tpLogin.Controls.Add(uiBtnLogin);
-            tpLogin.Controls.Add(USER_PWD);
-            tpLogin.Controls.Add(USER_NAME);
-            tpLogin.Controls.Add(uiLblPWD);
-            tpLogin.Controls.Add(uiLblUSER_NAME);
-            tpLogin.Location = new Point(201, 0);
-            tpLogin.Name = "tpLogin";
-            tpLogin.Size = new Size(602, 453);
-            tpLogin.TabIndex = 0;
-            tpLogin.Text = "Log in";
-            tpLogin.UseVisualStyleBackColor = true;
-            tpLogin.Click += tpLogin_Click;
+            tpPI.Location = new Point(201, 0);
+            tpPI.Name = "tpPI";
+            tpPI.Size = new Size(602, 453);
+            tpPI.TabIndex = 5;
+            tpPI.Text = "Panalty and interest";
+            tpPI.UseVisualStyleBackColor = true;
             // 
-            // uiBtnLogin
+            // tpReports
             // 
-            uiBtnLogin.FillColor = Color.Maroon;
-            uiBtnLogin.Font = new Font("Microsoft Sans Serif", 12F);
-            uiBtnLogin.Location = new Point(310, 296);
-            uiBtnLogin.MinimumSize = new Size(1, 1);
-            uiBtnLogin.Name = "uiBtnLogin";
-            uiBtnLogin.RectColor = Color.FromArgb(64, 0, 0);
-            uiBtnLogin.Size = new Size(125, 44);
-            uiBtnLogin.TabIndex = 3;
-            uiBtnLogin.Text = "LOG IN";
-            uiBtnLogin.TipsFont = new Font("Microsoft Sans Serif", 9F);
-            uiBtnLogin.Click += uiBtnLogin_Click;
+            tpReports.Location = new Point(201, 0);
+            tpReports.Name = "tpReports";
+            tpReports.Size = new Size(602, 453);
+            tpReports.TabIndex = 4;
+            tpReports.Text = "Reports";
+            tpReports.UseVisualStyleBackColor = true;
             // 
-            // USER_PWD
+            // tpLaon
             // 
-            USER_PWD.Font = new Font("Microsoft Sans Serif", 12F);
-            USER_PWD.Location = new Point(215, 195);
-            USER_PWD.Margin = new Padding(4, 5, 4, 5);
-            USER_PWD.MinimumSize = new Size(1, 16);
-            USER_PWD.Name = "USER_PWD";
-            USER_PWD.Padding = new Padding(5);
-            USER_PWD.RectColor = Color.Maroon;
-            USER_PWD.ShowText = false;
-            USER_PWD.Size = new Size(304, 36);
-            USER_PWD.TabIndex = 3;
-            USER_PWD.TextAlignment = ContentAlignment.MiddleLeft;
-            USER_PWD.Watermark = "";
+            tpLaon.Location = new Point(201, 0);
+            tpLaon.Name = "tpLaon";
+            tpLaon.Size = new Size(602, 453);
+            tpLaon.TabIndex = 2;
+            tpLaon.Text = "Laon";
+            tpLaon.UseVisualStyleBackColor = true;
             // 
-            // USER_NAME
+            // tpCustomer
             // 
-            USER_NAME.Font = new Font("Microsoft Sans Serif", 12F);
-            USER_NAME.Location = new Point(215, 79);
-            USER_NAME.Margin = new Padding(4, 5, 4, 5);
-            USER_NAME.MinimumSize = new Size(1, 16);
-            USER_NAME.Name = "USER_NAME";
-            USER_NAME.Padding = new Padding(5);
-            USER_NAME.RectColor = Color.Maroon;
-            USER_NAME.ShowText = false;
-            USER_NAME.Size = new Size(304, 36);
-            USER_NAME.TabIndex = 2;
-            USER_NAME.TextAlignment = ContentAlignment.MiddleLeft;
-            USER_NAME.Watermark = "";
-            // 
-            // uiLblPWD
-            // 
-            uiLblPWD.Font = new Font("Microsoft Sans Serif", 12F);
-            uiLblPWD.ForeColor = Color.Maroon;
-            uiLblPWD.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
-            uiLblPWD.Location = new Point(51, 202);
-            uiLblPWD.Name = "uiLblPWD";
-            uiLblPWD.Size = new Size(157, 29);
-            uiLblPWD.TabIndex = 1;
-            uiLblPWD.Text = "USER_PWD :";
-            // 
-            // uiLblUSER_NAME
-            // 
-            uiLblUSER_NAME.Font = new Font("Microsoft Sans Serif", 12F);
-            uiLblUSER_NAME.ForeColor = Color.Maroon;
-            uiLblUSER_NAME.Location = new Point(51, 86);
-            uiLblUSER_NAME.Name = "uiLblUSER_NAME";
-            uiLblUSER_NAME.Size = new Size(157, 29);
-            uiLblUSER_NAME.TabIndex = 0;
-            uiLblUSER_NAME.Text = "USER_NAME :";
+            tpCustomer.Location = new Point(201, 0);
+            tpCustomer.Name = "tpCustomer";
+            tpCustomer.Size = new Size(602, 453);
+            tpCustomer.TabIndex = 1;
+            tpCustomer.Text = "Customer";
+            tpCustomer.UseVisualStyleBackColor = true;
             // 
             // tpuser_acc
             // 
@@ -390,59 +340,264 @@
             txtNewUser.TabIndex = 0;
             txtNewUser.Text = "USER_ID :";
             // 
-            // tpCustomer
+            // tpLogin
             // 
-            tpCustomer.Location = new Point(201, 0);
-            tpCustomer.Name = "tpCustomer";
-            tpCustomer.Size = new Size(602, 453);
-            tpCustomer.TabIndex = 1;
-            tpCustomer.Text = "Customer";
-            tpCustomer.UseVisualStyleBackColor = true;
+            tpLogin.BackColor = Color.White;
+            tpLogin.Controls.Add(uiBtnLogin);
+            tpLogin.Controls.Add(USER_PWD);
+            tpLogin.Controls.Add(USER_NAME);
+            tpLogin.Controls.Add(uiLblPWD);
+            tpLogin.Controls.Add(uiLblUSER_NAME);
+            tpLogin.Location = new Point(201, 0);
+            tpLogin.Name = "tpLogin";
+            tpLogin.Size = new Size(602, 453);
+            tpLogin.TabIndex = 0;
+            tpLogin.Text = "Log in";
+            tpLogin.Click += tpLogin_Click;
             // 
-            // tpLaon
+            // uiBtnLogin
             // 
-            tpLaon.Location = new Point(201, 0);
-            tpLaon.Name = "tpLaon";
-            tpLaon.Size = new Size(602, 453);
-            tpLaon.TabIndex = 2;
-            tpLaon.Text = "Laon";
-            tpLaon.UseVisualStyleBackColor = true;
+            uiBtnLogin.FillColor = Color.Maroon;
+            uiBtnLogin.Font = new Font("Microsoft Sans Serif", 12F);
+            uiBtnLogin.Location = new Point(310, 296);
+            uiBtnLogin.MinimumSize = new Size(1, 1);
+            uiBtnLogin.Name = "uiBtnLogin";
+            uiBtnLogin.RectColor = Color.FromArgb(64, 0, 0);
+            uiBtnLogin.Size = new Size(125, 44);
+            uiBtnLogin.TabIndex = 3;
+            uiBtnLogin.Text = "LOG IN";
+            uiBtnLogin.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            uiBtnLogin.Click += uiBtnLogin_Click;
             // 
-            // tpPayment
+            // USER_PWD
             // 
-            tpPayment.Location = new Point(201, 0);
-            tpPayment.Name = "tpPayment";
-            tpPayment.Size = new Size(602, 453);
-            tpPayment.TabIndex = 3;
-            tpPayment.Text = "Payment";
-            tpPayment.UseVisualStyleBackColor = true;
+            USER_PWD.Font = new Font("Microsoft Sans Serif", 12F);
+            USER_PWD.Location = new Point(215, 195);
+            USER_PWD.Margin = new Padding(4, 5, 4, 5);
+            USER_PWD.MinimumSize = new Size(1, 16);
+            USER_PWD.Name = "USER_PWD";
+            USER_PWD.Padding = new Padding(5);
+            USER_PWD.RectColor = Color.Maroon;
+            USER_PWD.ShowText = false;
+            USER_PWD.Size = new Size(304, 36);
+            USER_PWD.TabIndex = 3;
+            USER_PWD.TextAlignment = ContentAlignment.MiddleLeft;
+            USER_PWD.Watermark = "";
             // 
-            // tpReports
+            // USER_NAME
             // 
-            tpReports.Location = new Point(201, 0);
-            tpReports.Name = "tpReports";
-            tpReports.Size = new Size(602, 453);
-            tpReports.TabIndex = 4;
-            tpReports.Text = "Reports";
-            tpReports.UseVisualStyleBackColor = true;
+            USER_NAME.Font = new Font("Microsoft Sans Serif", 12F);
+            USER_NAME.Location = new Point(215, 79);
+            USER_NAME.Margin = new Padding(4, 5, 4, 5);
+            USER_NAME.MinimumSize = new Size(1, 16);
+            USER_NAME.Name = "USER_NAME";
+            USER_NAME.Padding = new Padding(5);
+            USER_NAME.RectColor = Color.Maroon;
+            USER_NAME.ShowText = false;
+            USER_NAME.Size = new Size(304, 36);
+            USER_NAME.TabIndex = 2;
+            USER_NAME.TextAlignment = ContentAlignment.MiddleLeft;
+            USER_NAME.Watermark = "";
             // 
-            // tpUser
+            // uiLblPWD
             // 
-            tpUser.Location = new Point(201, 0);
-            tpUser.Name = "tpUser";
-            tpUser.Size = new Size(602, 453);
-            tpUser.TabIndex = 5;
-            tpUser.Text = "User";
-            tpUser.UseVisualStyleBackColor = true;
+            uiLblPWD.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLblPWD.ForeColor = Color.Maroon;
+            uiLblPWD.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
+            uiLblPWD.Location = new Point(51, 202);
+            uiLblPWD.Name = "uiLblPWD";
+            uiLblPWD.Size = new Size(157, 29);
+            uiLblPWD.TabIndex = 1;
+            uiLblPWD.Text = "USER_PWD :";
             // 
-            // tpSetting
+            // uiLblUSER_NAME
             // 
-            tpSetting.Location = new Point(201, 0);
-            tpSetting.Name = "tpSetting";
-            tpSetting.Size = new Size(602, 453);
-            tpSetting.TabIndex = 6;
-            tpSetting.Text = "Setting";
-            tpSetting.UseVisualStyleBackColor = true;
+            uiLblUSER_NAME.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLblUSER_NAME.ForeColor = Color.Maroon;
+            uiLblUSER_NAME.Location = new Point(51, 86);
+            uiLblUSER_NAME.Name = "uiLblUSER_NAME";
+            uiLblUSER_NAME.Size = new Size(157, 29);
+            uiLblUSER_NAME.TabIndex = 0;
+            uiLblUSER_NAME.Text = "USER_NAME :";
+            // 
+            // uiTabControlMenu1
+            // 
+            uiTabControlMenu1.Alignment = TabAlignment.Left;
+            uiTabControlMenu1.Controls.Add(tpLogin);
+            uiTabControlMenu1.Controls.Add(tpuser_acc);
+            uiTabControlMenu1.Controls.Add(tpCustomer);
+            uiTabControlMenu1.Controls.Add(tpLaon);
+            uiTabControlMenu1.Controls.Add(tpPI);
+            uiTabControlMenu1.Controls.Add(tpRP);
+            uiTabControlMenu1.Controls.Add(tpReports);
+            uiTabControlMenu1.Controls.Add(tpSetting);
+            uiTabControlMenu1.DrawMode = TabDrawMode.OwnerDrawFixed;
+            uiTabControlMenu1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTabControlMenu1.Location = new Point(0, 0);
+            uiTabControlMenu1.MenuStyle = Sunny.UI.UIMenuStyle.Custom;
+            uiTabControlMenu1.Multiline = true;
+            uiTabControlMenu1.Name = "uiTabControlMenu1";
+            uiTabControlMenu1.SelectedIndex = 0;
+            uiTabControlMenu1.Size = new Size(803, 453);
+            uiTabControlMenu1.SizeMode = TabSizeMode.Fixed;
+            uiTabControlMenu1.TabBackColor = Color.Maroon;
+            uiTabControlMenu1.TabIndex = 0;
+            uiTabControlMenu1.TabSelectedColor = Color.GhostWhite;
+            uiTabControlMenu1.TabSelectedForeColor = Color.Maroon;
+            uiTabControlMenu1.TabSelectedHighColor = Color.Transparent;
+            uiTabControlMenu1.TabUnSelectedForeColor = Color.WhiteSmoke;
+            // 
+            // tpRP
+            // 
+            tpRP.Controls.Add(uiLabel4);
+            tpRP.Controls.Add(uiLabel3);
+            tpRP.Controls.Add(uiLabel2);
+            tpRP.Controls.Add(uiLabel1);
+            tpRP.Controls.Add(uiButton2);
+            tpRP.Controls.Add(BtnSearch);
+            tpRP.Controls.Add(uiTextBox2);
+            tpRP.Controls.Add(uiTextBox3);
+            tpRP.Controls.Add(uiTextBox4);
+            tpRP.Controls.Add(uiTextBox5);
+            tpRP.Controls.Add(uiTextBox1);
+            tpRP.Location = new Point(201, 0);
+            tpRP.Name = "tpRP";
+            tpRP.Size = new Size(602, 453);
+            tpRP.TabIndex = 8;
+            tpRP.Text = "Repayment";
+            tpRP.UseVisualStyleBackColor = true;
+            // 
+            // uiTextBox1
+            // 
+            uiTextBox1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTextBox1.Location = new Point(56, 5);
+            uiTextBox1.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox1.MinimumSize = new Size(1, 16);
+            uiTextBox1.Name = "uiTextBox1";
+            uiTextBox1.Padding = new Padding(5);
+            uiTextBox1.ShowText = false;
+            uiTextBox1.Size = new Size(458, 36);
+            uiTextBox1.TabIndex = 0;
+            uiTextBox1.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox1.Watermark = "";
+            // 
+            // uiTextBox2
+            // 
+            uiTextBox2.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTextBox2.Location = new Point(132, 141);
+            uiTextBox2.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox2.MinimumSize = new Size(1, 16);
+            uiTextBox2.Name = "uiTextBox2";
+            uiTextBox2.Padding = new Padding(5);
+            uiTextBox2.ShowText = false;
+            uiTextBox2.Size = new Size(458, 36);
+            uiTextBox2.TabIndex = 3;
+            uiTextBox2.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox2.Watermark = "";
+            // 
+            // uiTextBox3
+            // 
+            uiTextBox3.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTextBox3.Location = new Point(132, 203);
+            uiTextBox3.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox3.MinimumSize = new Size(1, 16);
+            uiTextBox3.Name = "uiTextBox3";
+            uiTextBox3.Padding = new Padding(5);
+            uiTextBox3.ShowText = false;
+            uiTextBox3.Size = new Size(458, 36);
+            uiTextBox3.TabIndex = 3;
+            uiTextBox3.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox3.Watermark = "";
+            // 
+            // uiTextBox4
+            // 
+            uiTextBox4.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTextBox4.Location = new Point(132, 257);
+            uiTextBox4.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox4.MinimumSize = new Size(1, 16);
+            uiTextBox4.Name = "uiTextBox4";
+            uiTextBox4.Padding = new Padding(5);
+            uiTextBox4.ShowText = false;
+            uiTextBox4.Size = new Size(458, 36);
+            uiTextBox4.TabIndex = 3;
+            uiTextBox4.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox4.Watermark = "";
+            // 
+            // uiTextBox5
+            // 
+            uiTextBox5.Font = new Font("Microsoft Sans Serif", 12F);
+            uiTextBox5.Location = new Point(132, 312);
+            uiTextBox5.Margin = new Padding(4, 5, 4, 5);
+            uiTextBox5.MinimumSize = new Size(1, 16);
+            uiTextBox5.Name = "uiTextBox5";
+            uiTextBox5.Padding = new Padding(5);
+            uiTextBox5.ShowText = false;
+            uiTextBox5.Size = new Size(458, 36);
+            uiTextBox5.TabIndex = 3;
+            uiTextBox5.TextAlignment = ContentAlignment.MiddleLeft;
+            uiTextBox5.Watermark = "";
+            // 
+            // BtnSearch
+            // 
+            BtnSearch.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnSearch.Location = new Point(209, 62);
+            BtnSearch.MinimumSize = new Size(1, 1);
+            BtnSearch.Name = "BtnSearch";
+            BtnSearch.Size = new Size(125, 44);
+            BtnSearch.TabIndex = 4;
+            BtnSearch.Text = "SEARCH";
+            BtnSearch.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            // 
+            // uiButton2
+            // 
+            uiButton2.Font = new Font("Microsoft Sans Serif", 12F);
+            uiButton2.Location = new Point(294, 381);
+            uiButton2.MinimumSize = new Size(1, 1);
+            uiButton2.Name = "uiButton2";
+            uiButton2.Size = new Size(125, 44);
+            uiButton2.TabIndex = 5;
+            uiButton2.Text = "uiButton2";
+            uiButton2.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            // 
+            // uiLabel1
+            // 
+            uiLabel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLabel1.ForeColor = Color.FromArgb(48, 48, 48);
+            uiLabel1.Location = new Point(0, 148);
+            uiLabel1.Name = "uiLabel1";
+            uiLabel1.Size = new Size(125, 29);
+            uiLabel1.TabIndex = 6;
+            uiLabel1.Text = "uiLabel1";
+            // 
+            // uiLabel2
+            // 
+            uiLabel2.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLabel2.ForeColor = Color.FromArgb(48, 48, 48);
+            uiLabel2.Location = new Point(0, 203);
+            uiLabel2.Name = "uiLabel2";
+            uiLabel2.Size = new Size(125, 29);
+            uiLabel2.TabIndex = 7;
+            uiLabel2.Text = "uiLabel2";
+            // 
+            // uiLabel3
+            // 
+            uiLabel3.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLabel3.ForeColor = Color.FromArgb(48, 48, 48);
+            uiLabel3.Location = new Point(0, 257);
+            uiLabel3.Name = "uiLabel3";
+            uiLabel3.Size = new Size(125, 29);
+            uiLabel3.TabIndex = 8;
+            uiLabel3.Text = "uiLabel3";
+            // 
+            // uiLabel4
+            // 
+            uiLabel4.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLabel4.ForeColor = Color.FromArgb(48, 48, 48);
+            uiLabel4.Location = new Point(0, 319);
+            uiLabel4.Name = "uiLabel4";
+            uiLabel4.Size = new Size(125, 29);
+            uiLabel4.TabIndex = 9;
+            uiLabel4.Text = "uiLabel4";
             // 
             // Form1
             // 
@@ -454,41 +609,53 @@
             Name = "Form1";
             Text = "Micro Loan Managermenet System";
             Load += Form1_Load;
-            uiTabControlMenu1.ResumeLayout(false);
-            tpLogin.ResumeLayout(false);
             tpuser_acc.ResumeLayout(false);
+            tpLogin.ResumeLayout(false);
+            uiTabControlMenu1.ResumeLayout(false);
+            tpRP.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Sunny.UI.UITabControlMenu uiTabControlMenu1;
-        private TabPage tpLogin;
-        private TabPage tpCustomer;
-        private TabPage tpLaon;
-        private TabPage tpPayment;
-        private TabPage tpReports;
-        private TabPage tpUser;
         private TabPage tpSetting;
-        private Sunny.UI.UILabel uiLblUSER_NAME;
-        private Sunny.UI.UILabel uiLblPWD;
-        private Sunny.UI.UIButton uiBtnLogin;
-        private Sunny.UI.UITextBox USER_PWD;
-        private Sunny.UI.UITextBox USER_NAME;
+        private TabPage tpPI;
+        private TabPage tpReports;
+        private TabPage tpLaon;
+        private TabPage tpCustomer;
         private TabPage tpuser_acc;
-        private Sunny.UI.UILabel txtUserEmail;
-        private Sunny.UI.UILabel txtEmpName;
-        private Sunny.UI.UILabel txtNewPass;
-        private Sunny.UI.UILabel txtNewUser;
-        private Sunny.UI.UILabel txtProfile;
+        private Sunny.UI.UIButton uiBtnview;
+        private Sunny.UI.UIButton uiBtndelete;
+        private Sunny.UI.UIButton uiBtnupdate;
+        private Sunny.UI.UIButton uiBtninsert;
         private Sunny.UI.UIComboBox uicboUserProfile;
         private Sunny.UI.UITextBox uitxtUserEmail;
         private Sunny.UI.UITextBox uitxtUserName;
         private Sunny.UI.UITextBox uitxtUserPassword;
         private Sunny.UI.UITextBox uitxtUserID;
-        private Sunny.UI.UIButton uiBtninsert;
-        private Sunny.UI.UIButton uiBtnview;
-        private Sunny.UI.UIButton uiBtndelete;
-        private Sunny.UI.UIButton uiBtnupdate;
+        private Sunny.UI.UILabel txtProfile;
+        private Sunny.UI.UILabel txtUserEmail;
+        private Sunny.UI.UILabel txtEmpName;
+        private Sunny.UI.UILabel txtNewPass;
+        private Sunny.UI.UILabel txtNewUser;
+        private TabPage tpLogin;
+        private Sunny.UI.UIButton uiBtnLogin;
+        private Sunny.UI.UITextBox USER_PWD;
+        private Sunny.UI.UITextBox USER_NAME;
+        private Sunny.UI.UILabel uiLblPWD;
+        private Sunny.UI.UILabel uiLblUSER_NAME;
+        private Sunny.UI.UITabControlMenu uiTabControlMenu1;
+        private TabPage tpRP;
+        private Sunny.UI.UITextBox uiTextBox1;
+        private Sunny.UI.UILabel uiLabel4;
+        private Sunny.UI.UILabel uiLabel3;
+        private Sunny.UI.UILabel uiLabel2;
+        private Sunny.UI.UILabel uiLabel1;
+        private Sunny.UI.UIButton uiButton2;
+        private Sunny.UI.UIButton BtnSearch;
+        private Sunny.UI.UITextBox uiTextBox2;
+        private Sunny.UI.UITextBox uiTextBox3;
+        private Sunny.UI.UITextBox uiTextBox4;
+        private Sunny.UI.UITextBox uiTextBox5;
     }
 }
