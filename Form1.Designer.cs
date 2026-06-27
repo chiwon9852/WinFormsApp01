@@ -32,6 +32,12 @@
             tpSetting = new TabPage();
             tpPenalty = new TabPage();
             tpReports = new TabPage();
+            BtnNext = new Sunny.UI.UIButton();
+            BtnCancel = new Sunny.UI.UIButton();
+            uiCheckBox1 = new Sunny.UI.UICheckBox();
+            uiRichTextBox1 = new Sunny.UI.UIRichTextBox();
+            LblTitle = new Sunny.UI.UILabel();
+            pictureBox1 = new PictureBox();
             tpLoan = new TabPage();
             lvLoanReport = new ListView();
             BtnCaculate = new Sunny.UI.UIButton();
@@ -85,6 +91,9 @@
             txtTotalAmoun = new Sunny.UI.UITextBox();
             txtPayAmount = new Sunny.UI.UITextBox();
             txtSearchLoanID = new Sunny.UI.UITextBox();
+            tpReports.SuspendLayout();
+            uiRichTextBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tpLoan.SuspendLayout();
             tpLogin.SuspendLayout();
             uiTabControlMenu1.SuspendLayout();
@@ -113,12 +122,87 @@
             // 
             // tpReports
             // 
+            tpReports.Controls.Add(BtnNext);
+            tpReports.Controls.Add(BtnCancel);
+            tpReports.Controls.Add(uiCheckBox1);
+            tpReports.Controls.Add(uiRichTextBox1);
+            tpReports.Controls.Add(pictureBox1);
             tpReports.Location = new Point(201, 0);
             tpReports.Name = "tpReports";
             tpReports.Size = new Size(837, 453);
             tpReports.TabIndex = 4;
             tpReports.Text = "Reports";
             tpReports.UseVisualStyleBackColor = true;
+            // 
+            // BtnNext
+            // 
+            BtnNext.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnNext.Location = new Point(526, 312);
+            BtnNext.MinimumSize = new Size(1, 1);
+            BtnNext.Name = "BtnNext";
+            BtnNext.Size = new Size(243, 44);
+            BtnNext.TabIndex = 4;
+            BtnNext.Text = "Next";
+            BtnNext.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            BtnNext.Click += BtnNext_Click;
+            // 
+            // BtnCancel
+            // 
+            BtnCancel.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnCancel.Location = new Point(30, 312);
+            BtnCancel.MinimumSize = new Size(1, 1);
+            BtnCancel.Name = "BtnCancel";
+            BtnCancel.Size = new Size(267, 44);
+            BtnCancel.TabIndex = 3;
+            BtnCancel.Text = "Cancel";
+            BtnCancel.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            BtnCancel.Click += BtnCancel_Click;
+            // 
+            // uiCheckBox1
+            // 
+            uiCheckBox1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiCheckBox1.ForeColor = Color.FromArgb(48, 48, 48);
+            uiCheckBox1.Location = new Point(30, 270);
+            uiCheckBox1.MinimumSize = new Size(1, 1);
+            uiCheckBox1.Name = "uiCheckBox1";
+            uiCheckBox1.Size = new Size(295, 36);
+            uiCheckBox1.TabIndex = 2;
+            uiCheckBox1.Text = "ខ្ញុំបានអាន និងយល់ព្រមតាមលក្ខខណ្ឌ";
+            uiCheckBox1.CheckedChanged += uiCheckBox1_CheckedChanged;
+            // 
+            // uiRichTextBox1
+            // 
+            uiRichTextBox1.Controls.Add(LblTitle);
+            uiRichTextBox1.FillColor = Color.White;
+            uiRichTextBox1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiRichTextBox1.Location = new Point(30, 82);
+            uiRichTextBox1.Margin = new Padding(4, 5, 4, 5);
+            uiRichTextBox1.MinimumSize = new Size(1, 1);
+            uiRichTextBox1.Name = "uiRichTextBox1";
+            uiRichTextBox1.Padding = new Padding(2);
+            uiRichTextBox1.ShowText = false;
+            uiRichTextBox1.Size = new Size(739, 180);
+            uiRichTextBox1.TabIndex = 1;
+            uiRichTextBox1.TextAlignment = ContentAlignment.MiddleCenter;
+            uiRichTextBox1.TextChanged += uiRichTextBox1_TextChanged;
+            // 
+            // LblTitle
+            // 
+            LblTitle.Font = new Font("Microsoft Sans Serif", 12F);
+            LblTitle.ForeColor = Color.FromArgb(48, 48, 48);
+            LblTitle.Location = new Point(230, 13);
+            LblTitle.Name = "LblTitle";
+            LblTitle.Size = new Size(184, 29);
+            LblTitle.TabIndex = 3;
+            LblTitle.Text = "លក្ខខណ្ឌ(Conditions)";
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Location = new Point(284, 12);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(125, 62);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
             // 
             // tpLoan
             // 
@@ -885,6 +969,9 @@
             Name = "Form1";
             Text = "Micro Loan Managermenet System";
             Load += Form1_Load;
+            tpReports.ResumeLayout(false);
+            uiRichTextBox1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tpLoan.ResumeLayout(false);
             tpLogin.ResumeLayout(false);
             uiTabControlMenu1.ResumeLayout(false);
@@ -952,5 +1039,11 @@
         private Sunny.UI.UICheckBox ChkCustomer;
         private ListView lvLoanReport;
         private Sunny.UI.UIButton BtnCaculate;
+        private PictureBox pictureBox1;
+        private Sunny.UI.UIButton BtnNext;
+        private Sunny.UI.UIButton BtnCancel;
+        private Sunny.UI.UICheckBox uiCheckBox1;
+        private Sunny.UI.UIRichTextBox uiRichTextBox1;
+        private Sunny.UI.UILabel LblTitle;
     }
 }

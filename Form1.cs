@@ -479,5 +479,58 @@ namespace WinFormsApp01
                 if (Connection.conn.State == ConnectionState.Open) Connection.conn.Close();
             }
         }
+
+        private void uiRichTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            {
+                uiRichTextBox1.ReadOnly = true;
+
+                uiRichTextBox1.Text =
+            @"គោលនយោបាយកម្ចី (Loan Policy)
+
+ការប្រើប្រាស់សេវាកម្ចីប្រាក់ ត្រូវគោរពតាមលក្ខខណ្ឌខាងក្រោម៖
+
+The borrower must comply with the following terms and conditions:
+
+✓ ចំនួនកម្ចីអតិបរមា៖ $10,000
+  Maximum Loan Amount: $10,000
+
+✓ រយៈពេលកម្ចី៖ 6 ដល់ 60 ខែ
+  Loan Term: 6 to 60 Months
+
+✓ ត្រូវមានអត្តសញ្ញាណប័ណ្ណ
+  A valid National ID Card is required.
+
+✓ អត្រាការប្រាក់ចាប់ពី 1% ក្នុងមួយខែ
+  Interest Rate starts from 1% per month.
+
+✓ ត្រូវសងប្រាក់រៀងរាល់ខែ
+  Monthly repayment is required.
+
+✓ ការសងយឺតអាចមានការផាកពិន័យ
+  Late payments may result in penalty charges.
+
+✓ ព័ត៌មានអតិថិជននឹងត្រូវរក្សាជាការសម្ងាត់
+  Customer information will be kept confidential.
+
+✓ អ្នកខ្ចីត្រូវអាន និងយល់ព្រមលើលក្ខខណ្ឌទាំងអស់។
+  The borrower must read and agree to all terms and conditions before proceeding.";
+            }
+        }
+
+        private void uiCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            uiCheckBox1.Enabled = uiCheckBox1.Checked;
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnNext_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
