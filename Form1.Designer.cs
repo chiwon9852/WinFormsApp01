@@ -415,18 +415,24 @@
             // 
             // GroupPermissions
             // 
+            GroupPermissions.BackColor = Color.FromArgb(192, 0, 0);
             GroupPermissions.Controls.Add(ChkSetting);
             GroupPermissions.Controls.Add(ChkReports);
             GroupPermissions.Controls.Add(ChkRepayment);
             GroupPermissions.Controls.Add(ChkPenalty);
             GroupPermissions.Controls.Add(ChkLoan);
             GroupPermissions.Controls.Add(ChkCustomer);
+            GroupPermissions.FillColor = Color.FromArgb(192, 0, 0);
             GroupPermissions.Font = new Font("Microsoft Sans Serif", 12F);
+            GroupPermissions.ForeColor = Color.White;
+            GroupPermissions.ForeDisableColor = Color.White;
             GroupPermissions.Location = new Point(586, 5);
             GroupPermissions.Margin = new Padding(4, 5, 4, 5);
             GroupPermissions.MinimumSize = new Size(1, 1);
             GroupPermissions.Name = "GroupPermissions";
             GroupPermissions.Padding = new Padding(0, 32, 0, 0);
+            GroupPermissions.RectColor = Color.White;
+            GroupPermissions.RectDisableColor = Color.Transparent;
             GroupPermissions.Size = new Size(246, 448);
             GroupPermissions.TabIndex = 13;
             GroupPermissions.Text = "User Permissions";
@@ -434,8 +440,9 @@
             // 
             // ChkSetting
             // 
+            ChkSetting.CheckBoxColor = Color.White;
             ChkSetting.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkSetting.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkSetting.ForeColor = Color.White;
             ChkSetting.Location = new Point(29, 384);
             ChkSetting.MinimumSize = new Size(1, 1);
             ChkSetting.Name = "ChkSetting";
@@ -445,8 +452,9 @@
             // 
             // ChkReports
             // 
+            ChkReports.CheckBoxColor = Color.White;
             ChkReports.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkReports.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkReports.ForeColor = Color.White;
             ChkReports.Location = new Point(29, 326);
             ChkReports.MinimumSize = new Size(1, 1);
             ChkReports.Name = "ChkReports";
@@ -456,8 +464,9 @@
             // 
             // ChkRepayment
             // 
+            ChkRepayment.CheckBoxColor = Color.White;
             ChkRepayment.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkRepayment.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkRepayment.ForeColor = Color.White;
             ChkRepayment.Location = new Point(29, 263);
             ChkRepayment.MinimumSize = new Size(1, 1);
             ChkRepayment.Name = "ChkRepayment";
@@ -467,8 +476,9 @@
             // 
             // ChkPenalty
             // 
+            ChkPenalty.CheckBoxColor = Color.White;
             ChkPenalty.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkPenalty.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkPenalty.ForeColor = Color.White;
             ChkPenalty.Location = new Point(29, 197);
             ChkPenalty.MinimumSize = new Size(1, 1);
             ChkPenalty.Name = "ChkPenalty";
@@ -478,8 +488,9 @@
             // 
             // ChkLoan
             // 
+            ChkLoan.CheckBoxColor = Color.White;
             ChkLoan.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkLoan.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkLoan.ForeColor = Color.WhiteSmoke;
             ChkLoan.Location = new Point(29, 133);
             ChkLoan.MinimumSize = new Size(1, 1);
             ChkLoan.Name = "ChkLoan";
@@ -489,8 +500,9 @@
             // 
             // ChkCustomer
             // 
+            ChkCustomer.CheckBoxColor = Color.White;
             ChkCustomer.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkCustomer.ForeColor = Color.FromArgb(48, 48, 48);
+            ChkCustomer.ForeColor = Color.White;
             ChkCustomer.Location = new Point(29, 73);
             ChkCustomer.MinimumSize = new Size(1, 1);
             ChkCustomer.Name = "ChkCustomer";
