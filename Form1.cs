@@ -186,6 +186,11 @@ namespace WinFormsApp01
         private void tpLogin_Click(object sender, EventArgs e) { }
         private void tpuser_acc_Click(object sender, EventArgs e) { }
 
+        private void uiBtnview_Click(object sender, EventArgs e)
+        {
+
+        }
+
         private void tprepay_Click(object sender, EventArgs e)
         {
 

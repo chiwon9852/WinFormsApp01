@@ -94,6 +94,19 @@
             // 
             // tpReports
             // 
+            uiBtnLogin.FillColor = Color.Maroon;
+            uiBtnLogin.Font = new Font("Microsoft Sans Serif", 12F);
+            uiBtnLogin.Location = new Point(310, 296);
+            uiBtnLogin.MinimumSize = new Size(1, 1);
+            uiBtnLogin.Name = "uiBtnLogin";
+            uiBtnLogin.RectColor = Color.Maroon;
+            uiBtnLogin.RectHoverColor = Color.Maroon;
+            uiBtnLogin.RectSelectedColor = Color.FromArgb(255, 192, 192);
+            uiBtnLogin.Size = new Size(125, 44);
+            uiBtnLogin.TabIndex = 3;
+            uiBtnLogin.Text = "LOG IN";
+            uiBtnLogin.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            uiBtnLogin.Click += uiBtnLogin_Click;
             tpReports.Location = new Point(201, 0);
             tpReports.Name = "tpReports";
             tpReports.Size = new Size(602, 453);
@@ -103,6 +116,46 @@
             // 
             // tpLaon
             // 
+            USER_PWD.Font = new Font("Microsoft Sans Serif", 12F);
+            USER_PWD.Location = new Point(215, 195);
+            USER_PWD.Margin = new Padding(4, 5, 4, 5);
+            USER_PWD.MinimumSize = new Size(1, 16);
+            USER_PWD.Name = "USER_PWD";
+            USER_PWD.Padding = new Padding(5);
+            USER_PWD.RectColor = Color.Maroon;
+            USER_PWD.ShowText = false;
+            USER_PWD.Size = new Size(304, 36);
+            USER_PWD.TabIndex = 3;
+            USER_PWD.TextAlignment = ContentAlignment.MiddleLeft;
+            USER_PWD.Watermark = "";
+            // 
+            // USER_NAME
+            // 
+            USER_NAME.ButtonFillColor = Color.Blue;
+            USER_NAME.ButtonStyleInherited = false;
+            USER_NAME.Font = new Font("Microsoft Sans Serif", 12F);
+            USER_NAME.Location = new Point(215, 79);
+            USER_NAME.Margin = new Padding(4, 5, 4, 5);
+            USER_NAME.MinimumSize = new Size(1, 16);
+            USER_NAME.Name = "USER_NAME";
+            USER_NAME.Padding = new Padding(5);
+            USER_NAME.RectColor = Color.Maroon;
+            USER_NAME.ShowText = false;
+            USER_NAME.Size = new Size(304, 36);
+            USER_NAME.TabIndex = 2;
+            USER_NAME.TextAlignment = ContentAlignment.MiddleLeft;
+            USER_NAME.Watermark = "";
+            // 
+            // uiLblPWD
+            // 
+            uiLblPWD.Font = new Font("Microsoft Sans Serif", 12F);
+            uiLblPWD.ForeColor = Color.Maroon;
+            uiLblPWD.LiveSetting = System.Windows.Forms.Automation.AutomationLiveSetting.Assertive;
+            uiLblPWD.Location = new Point(51, 202);
+            uiLblPWD.Name = "uiLblPWD";
+            uiLblPWD.Size = new Size(157, 29);
+            uiLblPWD.TabIndex = 1;
+            uiLblPWD.Text = "USER_PWD :";
             tpLaon.Location = new Point(201, 0);
             tpLaon.Name = "tpLaon";
             tpLaon.Size = new Size(602, 453);
@@ -158,6 +211,7 @@
             uiBtnview.TabIndex = 12;
             uiBtnview.Text = "&VIEW";
             uiBtnview.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            uiBtnview.Click += uiBtnview_Click;
             // 
             // uiBtndelete
             // 
