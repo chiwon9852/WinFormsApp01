@@ -91,6 +91,8 @@
             txtTotalAmoun = new Sunny.UI.UITextBox();
             txtPayAmount = new Sunny.UI.UITextBox();
             txtSearchLoanID = new Sunny.UI.UITextBox();
+            tpSearchRecords = new TabPage();
+            ChkSearchRecords = new Sunny.UI.UICheckBox();
             tpReports.SuspendLayout();
             uiRichTextBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -455,6 +457,7 @@
             uiTabControlMenu1.Controls.Add(tpPenalty);
             uiTabControlMenu1.Controls.Add(tpRepayment);
             uiTabControlMenu1.Controls.Add(tpReports);
+            uiTabControlMenu1.Controls.Add(tpSearchRecords);
             uiTabControlMenu1.Controls.Add(tpSetting);
             uiTabControlMenu1.DrawMode = TabDrawMode.OwnerDrawFixed;
             uiTabControlMenu1.Font = new Font("Microsoft Sans Serif", 12F);
@@ -500,6 +503,7 @@
             // GroupPermissions
             // 
             GroupPermissions.BackColor = Color.Maroon;
+            GroupPermissions.Controls.Add(ChkSearchRecords);
             GroupPermissions.Controls.Add(ChkSetting);
             GroupPermissions.Controls.Add(ChkReports);
             GroupPermissions.Controls.Add(ChkRepayment);
@@ -527,7 +531,7 @@
             ChkSetting.CheckBoxColor = Color.White;
             ChkSetting.Font = new Font("Microsoft Sans Serif", 12F);
             ChkSetting.ForeColor = Color.White;
-            ChkSetting.Location = new Point(29, 384);
+            ChkSetting.Location = new Point(29, 376);
             ChkSetting.MinimumSize = new Size(1, 1);
             ChkSetting.Name = "ChkSetting";
             ChkSetting.Size = new Size(188, 36);
@@ -539,7 +543,7 @@
             ChkReports.CheckBoxColor = Color.White;
             ChkReports.Font = new Font("Microsoft Sans Serif", 12F);
             ChkReports.ForeColor = Color.White;
-            ChkReports.Location = new Point(29, 326);
+            ChkReports.Location = new Point(29, 269);
             ChkReports.MinimumSize = new Size(1, 1);
             ChkReports.Name = "ChkReports";
             ChkReports.Size = new Size(188, 36);
@@ -551,7 +555,7 @@
             ChkRepayment.CheckBoxColor = Color.White;
             ChkRepayment.Font = new Font("Microsoft Sans Serif", 12F);
             ChkRepayment.ForeColor = Color.White;
-            ChkRepayment.Location = new Point(29, 263);
+            ChkRepayment.Location = new Point(29, 208);
             ChkRepayment.MinimumSize = new Size(1, 1);
             ChkRepayment.Name = "ChkRepayment";
             ChkRepayment.Size = new Size(188, 36);
@@ -564,7 +568,7 @@
             ChkPenalty.CheckBoxColor = Color.White;
             ChkPenalty.Font = new Font("Microsoft Sans Serif", 12F);
             ChkPenalty.ForeColor = Color.White;
-            ChkPenalty.Location = new Point(29, 197);
+            ChkPenalty.Location = new Point(29, 149);
             ChkPenalty.MinimumSize = new Size(1, 1);
             ChkPenalty.Name = "ChkPenalty";
             ChkPenalty.Size = new Size(188, 36);
@@ -576,7 +580,7 @@
             ChkLoan.CheckBoxColor = Color.White;
             ChkLoan.Font = new Font("Microsoft Sans Serif", 12F);
             ChkLoan.ForeColor = Color.WhiteSmoke;
-            ChkLoan.Location = new Point(29, 133);
+            ChkLoan.Location = new Point(29, 88);
             ChkLoan.MinimumSize = new Size(1, 1);
             ChkLoan.Name = "ChkLoan";
             ChkLoan.Size = new Size(188, 36);
@@ -589,7 +593,7 @@
             ChkCustomer.CheckBoxColor = Color.White;
             ChkCustomer.Font = new Font("Microsoft Sans Serif", 12F);
             ChkCustomer.ForeColor = Color.White;
-            ChkCustomer.Location = new Point(29, 73);
+            ChkCustomer.Location = new Point(29, 35);
             ChkCustomer.MinimumSize = new Size(1, 1);
             ChkCustomer.Name = "ChkCustomer";
             ChkCustomer.Size = new Size(188, 36);
@@ -961,6 +965,27 @@
             txtSearchLoanID.Watermark = "";
             txtSearchLoanID.TextChanged += uiTextBox1_TextChanged;
             // 
+            // tpSearchRecords
+            // 
+            tpSearchRecords.Location = new Point(201, 0);
+            tpSearchRecords.Name = "tpSearchRecords";
+            tpSearchRecords.Size = new Size(837, 453);
+            tpSearchRecords.TabIndex = 9;
+            tpSearchRecords.Text = "Search Records";
+            tpSearchRecords.UseVisualStyleBackColor = true;
+            // 
+            // ChkSearchRecords
+            // 
+            ChkSearchRecords.CheckBoxColor = Color.White;
+            ChkSearchRecords.Font = new Font("Microsoft Sans Serif", 12F);
+            ChkSearchRecords.ForeColor = Color.White;
+            ChkSearchRecords.Location = new Point(29, 325);
+            ChkSearchRecords.MinimumSize = new Size(1, 1);
+            ChkSearchRecords.Name = "ChkSearchRecords";
+            ChkSearchRecords.Size = new Size(188, 36);
+            ChkSearchRecords.TabIndex = 6;
+            ChkSearchRecords.Text = "Search Records";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -1047,5 +1072,7 @@
         private Sunny.UI.UICheckBox uiCheckBox1;
         private Sunny.UI.UIRichTextBox uiRichTextBox1;
         private Sunny.UI.UILabel LblTitle;
+        private TabPage tpSearchRecords;
+        private Sunny.UI.UICheckBox ChkSearchRecords;
     }
 }

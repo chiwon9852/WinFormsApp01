@@ -40,7 +40,8 @@ namespace WinFormsApp01
                 tpRepayment,   // Index 4
                 tpReports,     // Index 5
                 tpPenalty,     // Index 6
-                tpSetting      // Index 7
+                tpSetting,
+                tpSetting      // Index 8
             };
 
             // បើកកម្មវិធីដំបូង លាក់ទាំងអស់ ទុកតែផ្ទាំង Login
@@ -91,6 +92,7 @@ namespace WinFormsApp01
             public static bool CanPenalty { get; set; }
             public static bool CanRepayment { get; set; }
             public static bool CanReport { get; set; }
+            public static bool CanSearch { get; set; }
             public static bool CanSetting { get; set; }
         }
 
@@ -143,6 +145,10 @@ namespace WinFormsApp01
                     {
                         uiTabControlMenu1.TabPages.Add(tab);
                     }
+                    else if (tab.Name == "tpSearchRecords" && UserSession.CanSetting)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
                     // 6. សិទ្ធិ Setting
                     else if (tab.Name == "tpSetting" && UserSession.CanSetting)
                     {
@@ -180,7 +186,7 @@ namespace WinFormsApp01
                 }
 
                 // ថែមការទាញយក Column សិទ្ធិទាំង ៦ ពី SQL
-                string query = "SELECT UserRole, CanCustomer, CanLoan, CanPenalty, CanRepayment, CanReport, CanSetting FROM tbl_Users WHERE Username LIKE @user AND Password LIKE @pass AND Status = 'Active'";
+                string query = "SELECT UserRole, CanCustomer, CanLoan, CanPenalty, CanRepayment, CanReport,CanSearch, CanSetting FROM tbl_Users WHERE Username LIKE @user AND Password LIKE @pass AND Status = 'Active'";
                 SqlCommand cmd = new SqlCommand(query, Connection.conn);
                 cmd.Parameters.AddWithValue("@user", USER_NAME.Text.Trim());
                 cmd.Parameters.AddWithValue("@pass", USER_PWD.Text.Trim());
@@ -198,6 +204,7 @@ namespace WinFormsApp01
                     UserSession.CanPenalty = reader["CanPenalty"] != DBNull.Value && Convert.ToBoolean(reader["CanPenalty"]);
                     UserSession.CanRepayment = reader["CanRepayment"] != DBNull.Value && Convert.ToBoolean(reader["CanRepayment"]);
                     UserSession.CanReport = reader["CanReport"] != DBNull.Value && Convert.ToBoolean(reader["CanReport"]);
+                    UserSession.CanSearch = reader["canSearch"] != DBNull.Value && Convert.ToBoolean(reader["canSearch"]);
                     UserSession.CanSetting = reader["CanSetting"] != DBNull.Value && Convert.ToBoolean(reader["CanSetting"]);
 
                     MessageBox.Show("ឡុកអ៊ីនចូលប្រព័ន្ធជោគជ័យ!", "ជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -245,7 +252,7 @@ namespace WinFormsApp01
 
                 // កែ Query ឱ្យរក្សាទុកទាំងសិទ្ធិដែលបានធិកលើ CheckBox ចូលទៅ Database ដែរ
                 string query = "INSERT INTO tbl_Users (Username, Password, EmployeeName, UserRole, Status, CanCustomer, CanLoan, CanPenalty, CanRepayment, CanReport, CanSetting) " +
-                               "VALUES (@user, @pass, @name, @role, 'Active', @canCust, @canLoan, @canPen, @canRepay, @canRep, @canSet)";
+                               "VALUES (@user, @pass, @name, @role, 'Active', @canCust, @canLoan, @canPen, @canRepay, @canRep,@canSearch, @canSet)";
 
                 SqlCommand cmd = new SqlCommand(query, Connection.conn);
 
@@ -264,6 +271,7 @@ namespace WinFormsApp01
                     cmd.Parameters.AddWithValue("@canRepay", true);
                     cmd.Parameters.AddWithValue("@canRep", true);
                     cmd.Parameters.AddWithValue("@canSet", true);
+                    cmd.Parameters.AddWithValue("@canSearch", true);
                 }
                 else
                 {
@@ -272,6 +280,7 @@ namespace WinFormsApp01
                     cmd.Parameters.AddWithValue("@canPen", ChkPenalty.Checked);
                     cmd.Parameters.AddWithValue("@canRepay", ChkRepayment.Checked);
                     cmd.Parameters.AddWithValue("@canRep", ChkReports.Checked); // ប្រកាស ChkReports តាមប្អូនសរសេរ
+                    cmd.Parameters.AddWithValue("@canSearch", ChkSearchRecords.Checked);
                     cmd.Parameters.AddWithValue("@canSet", ChkSetting.Checked);
                 }
 
@@ -292,6 +301,7 @@ namespace WinFormsApp01
                     ChkPenalty.Checked = false;
                     ChkRepayment.Checked = false;
                     ChkReports.Checked = false;
+                    ChkSearchRecords.Checked = false;
                     ChkSetting.Checked = false;
                 }
                 else
@@ -328,6 +338,7 @@ namespace WinFormsApp01
                 ChkPenalty.Checked = false;
                 ChkRepayment.Checked = false;
                 ChkReports.Checked = false;
+                ChkSearchRecords.Checked = false;
                 ChkSetting.Checked = false;
             }
             else if (selectedProfile == "master")
@@ -341,6 +352,7 @@ namespace WinFormsApp01
                 ChkRepayment.Checked = true;
                 ChkReports.Checked = true;
                 ChkSetting.Checked = true;
+                ChkSearchRecords.Checked= true;
             }
             else
             {
