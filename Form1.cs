@@ -190,5 +190,100 @@ namespace WinFormsApp01
         {
 
         }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            // 1. បង្កើតខ្សែភ្ជាប់ទៅកាន់ SQL Server របស់អ្នក
+            string connectionString = @"Server=MAMAMILA\SQLEXPRESS; Database=MICROLOAN; Integrated Security=True; TrustServerCertificate=True;";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // 2. សរសេរកូដ Query ដើម្បីទៅទាញទិន្នន័យមក (ឧទាហរណ៍)
+                    string query = "SELECT Principal, Interest FROM Table_Loan WHERE LoanID = @LoanID";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@LoanID", txtSearchLoanID.Text);
+
+                    SqlDataReader reader = cmd.ExecuteReader();
+
+                    if (reader.Read())
+                    {
+                        // បង្ហាញទិន្នន័យលើ TextBox នីមួយៗ
+                        txtPrincipal.Text = reader["Principal"].ToString();
+                        txtInterest.Text = reader["Interest"].ToString();
+
+                        // ផ្នែកគណនាប្រាក់ពិន័យ និងប្រាក់សរុប អាចបន្ថែមនៅត្រង់នេះ...
+                    }
+                    else
+                    {
+                        MessageBox.Show("រកមិនឃើញទិន្នន័យកិច្ចសន្យានេះទេ!");
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("មានបញ្ហាភ្ជាប់ទៅកាន់ Database: " + ex.Message);
+                }
+            }
+        }
+
+        private void btnPay_Click(object sender, EventArgs e)
+        {
+            // 1. ពិនិត្យមើលថា តើមានទិន្នន័យនៅក្នុងប្រឡោះស្វែងរកដែរឬទេ បើគ្មានទេមិនឲ្យបង់ឡើយ
+            if (string.IsNullOrEmpty(txtSearchLoanID.Text))
+            {
+                MessageBox.Show("សូមស្វែងរកលេខកូដកិច្ចសន្យាខ្ចីប្រាក់ជាមុនសិន!", "ព្រមាន", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 2. ខ្សែភ្ជាប់ទៅកាន់ SQL Server របស់អ្នក (ដូរឈ្មោះ Database របស់អ្នកផង)
+            string connectionString = @"Server=MAMAMILA\SQLEXPRESS; Database=ឈ្មោះDatabaseរបស់អ្នក; Integrated Security=True; TrustServerCertificate=True;";
+
+            // 3. សរសេរកូដ SQL Query ដើម្បីរក្សាទុកប្រវត្តិបង់ប្រាក់ចូល Table_Repayment
+            string query = @"INSERT INTO Table_Repayment (LoanID, PrincipalPaid, InterestPaid, PenaltyPaid, TotalPaid, PaymentDate) 
+                     VALUES (@LoanID, @Principal, @Interest, @Penalty, @Total, @PaymentDate)";
+
+            using (SqlConnection conn = new SqlConnection(connectionString))
+            {
+                try
+                {
+                    conn.Open();
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
+                    // 4. ចាប់យកតម្លៃពី TextBox នីមួយៗផ្ញើទៅឲ្យ SQL (ប្ដូរប្រភេទទៅជា Decimal/Double សម្រាប់លុយកាក់)
+                    cmd.Parameters.AddWithValue("@LoanID", txtSearchLoanID.Text);
+                    cmd.Parameters.AddWithValue("@Principal", Convert.ToDecimal(txtPrincipal.Text));
+                    cmd.Parameters.AddWithValue("@Interest", Convert.ToDecimal(txtInterest.Text));
+                    cmd.Parameters.AddWithValue("@Penalty", Convert.ToDecimal(txtPenalty.Text));
+                    cmd.Parameters.AddWithValue("@Total", Convert.ToDecimal(txtAmount.Text));
+                    cmd.Parameters.AddWithValue("@PaymentDate", DateTime.Now); // កត់ត្រាថ្ងៃខែឆ្នាំបច្ចុប្បន្នដែលមកបង់
+
+                    // 5. ដំណើរការកូដ
+                    int rowsAffected = cmd.ExecuteNonQuery();
+
+                    if (rowsAffected > 0)
+                    {
+                        MessageBox.Show("ការទូទាត់ប្រាក់ទទួលបានជោគជ័យ និងបានរក្សាទុកក្នុងប្រព័ន្ធ!", "ជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        // 6. សម្អាតប្រឡោះ TextBox ទាំងអស់ឡើងវិញ ដើម្បីរង់ចាំទទួលអ្នកបន្ទាប់
+                        ClearTextBoxes();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("មានបញ្ហាក្នុងការរក្សាទុកទិន្នន័យ៖ " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void ClearTextBoxes()
+        {
+            txtSearchLoanID.Clear();
+            txtPrincipal.Clear();
+            txtInterest.Clear();
+            txtPenalty.Clear();
+            txtAmount.Clear();
+        }
     }
 }
