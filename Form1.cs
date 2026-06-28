@@ -40,7 +40,7 @@ namespace WinFormsApp01
                 tpRepayment,   // Index 4
                 tpReports,     // Index 5
                 tpPenalty,     // Index 6
-                tpSetting,
+                tpSearchRecords,
                 tpSetting      // Index 8
             };
 
