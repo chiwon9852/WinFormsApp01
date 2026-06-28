@@ -499,14 +499,14 @@
             // 
             // GroupPermissions
             // 
-            GroupPermissions.BackColor = Color.FromArgb(192, 0, 0);
+            GroupPermissions.BackColor = Color.Maroon;
             GroupPermissions.Controls.Add(ChkSetting);
             GroupPermissions.Controls.Add(ChkReports);
             GroupPermissions.Controls.Add(ChkRepayment);
             GroupPermissions.Controls.Add(ChkPenalty);
             GroupPermissions.Controls.Add(ChkLoan);
             GroupPermissions.Controls.Add(ChkCustomer);
-            GroupPermissions.FillColor = Color.FromArgb(192, 0, 0);
+            GroupPermissions.FillColor = Color.Maroon;
             GroupPermissions.Font = new Font("Microsoft Sans Serif", 12F);
             GroupPermissions.ForeColor = Color.White;
             GroupPermissions.ForeDisableColor = Color.White;
@@ -557,6 +557,7 @@
             ChkRepayment.Size = new Size(188, 36);
             ChkRepayment.TabIndex = 3;
             ChkRepayment.Text = "Repayment";
+            ChkRepayment.CheckedChanged += ChkRepayment_CheckedChanged;
             // 
             // ChkPenalty
             // 
@@ -584,6 +585,7 @@
             // 
             // ChkCustomer
             // 
+            ChkCustomer.BackColor = Color.Maroon;
             ChkCustomer.CheckBoxColor = Color.White;
             ChkCustomer.Font = new Font("Microsoft Sans Serif", 12F);
             ChkCustomer.ForeColor = Color.White;
