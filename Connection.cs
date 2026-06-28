@@ -9,6 +9,10 @@ namespace WinFormsApp01
     internal class Connection
     {
         // ១. ផ្លូវតភ្ជាប់ (សូមដូរពាក្យ "ឈ្មោះ_Database_របស់អ្នក" ទៅជាឈ្មោះ Database ពិតប្រាកដរបស់អ្នក)
+        //public static string conStr = @"Data Source=(local)\SQLEXPRESS;Initial Catalog=MICROLAON;Integrated Security=True;TrustServerCertificate=True";
+        //// 🚨 ឱ្យគាត់ដូរបន្ទាត់ conStr មកជាបែបនេះវិញ៖
+        //public static string conStr = @"Data Source=MAMAMILA\SQLEXPRESS;Initial Catalog=MICROLOAN;Integrated Security=True;TrustServerCertificate=True";
+        public static string conStr = @"Data Source=DESKTOP-U2T2B52\SQLEXPRESS;Initial Catalog=MICROLOAN;Integrated Security=True;TrustServerCertificate=True";
         public static string conStr = @"Data Source=(local)\SQLEXPRESS;Initial Catalog=MICROLAON;Integrated Security=True;TrustServerCertificate=True";
         // 🚨 ឱ្យគាត់ដូរបន្ទាត់ conStr មកជាបែបនេះវិញ៖
         //public static string conStr = @"Data Source=MAMAMILA\SQLEXPRESS;Initial Catalog=MICROLOAN;Integrated Security=True;TrustServerCertificate=True";

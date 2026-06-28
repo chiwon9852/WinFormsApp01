@@ -17,20 +17,83 @@ namespace WinFormsApp01
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            // ចាប់យកផ្ទាំងទាំង ៨ តាមឈ្មោះពិតប្រាកដនៅលើ UI របស់បងមកផ្ទុកក្នុង Array
+
+
+            try
+            {
+                if (GroupPermissions != null)
+                {
+                    GroupPermissions.Enabled = false;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Load: " + ex.Message);
+            }
+
+            // ចាប់យកផ្ទាំងទាំង ៨ មកផ្ទុកក្នុង Array (ឈ្មោះត្រូវបេះបិទជាមួយលក្ខខណ្ឌខាងក្រោម)
             allTabs = new TabPage[] {
-        tpLogin,       // Index 0
-        tpuser_acc,    // Index 1 (បងមើលឈ្មោះក្នុងរូបថត: tpuser_acc)
-        tpCustomer,    // Index 2 (បងមើលឈ្មោះក្នុងរូបថត: tpCustomer)
-        tpLaon,        // Index 3
-        tpRepayment,     // Index 4
-        tpReports,     // Index 5
-        tpPI,        // Index 6
-        tpSetting      // Index 7
-        };
+                tpLogin,       // Index 0
+                tpuser_acc,    // Index 1
+                tpCustomer,    // Index 2
+                tpLoan,        // Index 3
+                tpRepayment,   // Index 4
+                tpReports,     // Index 5
+                tpPenalty,     // Index 6
+                tpSearchRecords,
+                tpSetting      // Index 8
+            };
 
             // បើកកម្មវិធីដំបូង លាក់ទាំងអស់ ទុកតែផ្ទាំង Login
             CheckUserPermission("guest");
+            // ==========================================================
+
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed) Connection.conn.Open();
+
+                // ⚠️ សូមប្ដូរពាក្យ tbl_Customers ទៅជាឈ្មោះតារាងអតិថិជនពិតប្រាកដក្នុង SQL របស់ប្អូន
+                string query = "SELECT CustomerID FROM Customer WHERE Status = 'Active'";
+                SqlCommand cmd = new SqlCommand(query, Connection.conn);
+                SqlDataReader reader = cmd.ExecuteReader();
+
+                cboLoanCustomer.Items.Clear(); // ឈ្មោះ ComboBox របស់ប្អូនត្រង់ប្រអប់ ID
+                while (reader.Read())
+                {
+                    cboLoanCustomer.Items.Add(reader["CustomerID"].ToString());
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("ទាញទិន្នន័យ ID បរាជ័យ: " + ex.Message);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open) Connection.conn.Close();
+            }
+            // ១. ដូរ View របស់ ListView ទៅជា Details តាមរយៈកូដ
+            lvLoanReport.View = View.Details;
+
+            // ២. ចាប់ផ្ដើមថែម Columns និងកំណត់ទំហំ (Width) របស់វា
+            lvLoanReport.Columns.Add("No", 50);             // Column ទី ១៖ លំដាប់លេខរៀង ទំហំ 50
+            lvLoanReport.Columns.Add("Customer ID", 100);    // Column ទី ២៖ ID អតិថិជន ទំហំ 100
+            lvLoanReport.Columns.Add("Amount", 120);         // Column ទី ៣៖ ចំនួនប្រាក់ខ្ចី ទំហំ 120
+            lvLoanReport.Columns.Add("Interest", 90);        // Column ទី ៤៖ ការប្រាក់ % ទំហំ 90
+            lvLoanReport.Columns.Add("Term", 90);            // Column ទី ៥៖ រយៈពេលខែ ទំហំ 90
+
+        }
+
+        public static class UserSession
+        {
+            public static string Role { get; set; }
+            public static bool CanCustomer { get; set; }
+            public static bool CanLoan { get; set; }
+            public static bool CanPenalty { get; set; }
+            public static bool CanRepayment { get; set; }
+            public static bool CanReport { get; set; }
+            public static bool CanSearch { get; set; }
+            public static bool CanSetting { get; set; }
         }
 
         private void CheckUserPermission(string userRole)
@@ -52,19 +115,50 @@ namespace WinFormsApp01
             }
             else if (role == "user")
             {
-                // បើជាបុគ្គលិក (User) ឱ្យរត់រកមើលផ្ទាំងណាដែលមានឈ្មោះពិតថា "tpCustomer"
+                // បើកបង្ហាញ TabPage ទៅតាមសិទ្ធិដែលបានកំណត់ក្នុង Database
                 foreach (TabPage tab in allTabs)
                 {
-                    if (tab != null && tab.Name == "tpCustomer")
+                    if (tab == null) continue;
+
+                    // 1. សិទ្ធិ Customer
+                    if (tab.Name == "tpCustomer" && UserSession.CanCustomer)
                     {
                         uiTabControlMenu1.TabPages.Add(tab);
-                        break;
+                    }
+                    // 2. សិទ្ធិ Loan
+                    else if (tab.Name == "tpLoan" && UserSession.CanLoan)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
+                    // 3. សិទ្ធិ Penalty (កែឈ្មោះឱ្យត្រូវនឹង tpPenalty ក្នុង Array)
+                    else if (tab.Name == "tpPenalty" && UserSession.CanPenalty)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
+                    // 4. សិទ្ធិ Repayment
+                    else if (tab.Name == "tpRepayment" && UserSession.CanRepayment)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
+                    // 5. សិទ្ធិ Report (កែឈ្មោះឱ្យត្រូវនឹង tpReports មាន s)
+                    else if (tab.Name == "tpReports" && UserSession.CanReport)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
+                    else if (tab.Name == "tpSearchRecords" && UserSession.CanSearch)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
+                    }
+                    // 6. សិទ្ធិ Setting
+                    else if (tab.Name == "tpSetting" && UserSession.CanSetting)
+                    {
+                        uiTabControlMenu1.TabPages.Add(tab);
                     }
                 }
             }
             else if (role == "guest")
             {
-                // ពេលដំបូងបង្អស់ បង្ហាញតែផ្ទាំង Login មួយគត់
+                // បើមិនទាន់ Login បង្ហាញតែផ្ទាំង Login
                 foreach (TabPage tab in allTabs)
                 {
                     if (tab != null && tab.Name == "tpLogin")
@@ -91,7 +185,8 @@ namespace WinFormsApp01
                     Connection.conn.Open();
                 }
 
-                string query = "SELECT UserRole FROM tbl_Users WHERE Username LIKE @user AND Password LIKE @pass AND Status = 'Active'";
+                // ថែមការទាញយក Column សិទ្ធិទាំង ៦ ពី SQL
+                string query = "SELECT UserRole, CanCustomer, CanLoan, CanPenalty, CanRepayment, CanReport,CanSearch, CanSetting FROM tbl_Users WHERE Username LIKE @user AND Password LIKE @pass AND Status = 'Active'";
                 SqlCommand cmd = new SqlCommand(query, Connection.conn);
                 cmd.Parameters.AddWithValue("@user", USER_NAME.Text.Trim());
                 cmd.Parameters.AddWithValue("@pass", USER_PWD.Text.Trim());
@@ -101,10 +196,21 @@ namespace WinFormsApp01
                 if (reader.Read())
                 {
                     string currentRole = reader["UserRole"].ToString();
+
+                    // ញាត់តម្លៃសិទ្ធិចូលទៅក្នុង UserSession ទុកឱ្យកម្មវិធីប្រើ
+                    UserSession.Role = currentRole;
+                    UserSession.CanCustomer = reader["CanCustomer"] != DBNull.Value && Convert.ToBoolean(reader["CanCustomer"]);
+                    UserSession.CanLoan = reader["CanLoan"] != DBNull.Value && Convert.ToBoolean(reader["CanLoan"]);
+                    UserSession.CanPenalty = reader["CanPenalty"] != DBNull.Value && Convert.ToBoolean(reader["CanPenalty"]);
+                    UserSession.CanRepayment = reader["CanRepayment"] != DBNull.Value && Convert.ToBoolean(reader["CanRepayment"]);
+                    UserSession.CanReport = reader["CanReport"] != DBNull.Value && Convert.ToBoolean(reader["CanReport"]);
+                    UserSession.CanSearch = reader["CanSearch"] != DBNull.Value && Convert.ToBoolean(reader["CanSearch"]);
+                    UserSession.CanSetting = reader["CanSetting"] != DBNull.Value && Convert.ToBoolean(reader["CanSetting"]);
+
                     MessageBox.Show("ឡុកអ៊ីនចូលប្រព័ន្ធជោគជ័យ!", "ជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     reader.Close();
 
-                    // ហៅមុខងារឆែកសិទ្ធិបើក Tab ទៅតាម Role
+                    // ឆែកសិទ្ធិបើក Tab
                     CheckUserPermission(currentRole);
                 }
                 else
@@ -131,7 +237,7 @@ namespace WinFormsApp01
             if (string.IsNullOrEmpty(uitxtUserID.Text) ||
                 string.IsNullOrEmpty(uitxtUserPassword.Text) ||
                 string.IsNullOrEmpty(uitxtUserName.Text) ||
-                uicboUserProfile.SelectedIndex == -1)
+                CboUserProfile.SelectedIndex == -1)
             {
                 MessageBox.Show("សូមបំពេញព័ត៌មានកាតព្វកិច្ចឱ្យបានគ្រប់ជ្រុងជ្រោយ!", "ព្រមាន", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
@@ -144,15 +250,39 @@ namespace WinFormsApp01
                     Connection.conn.Open();
                 }
 
-                string query = "INSERT INTO tbl_Users (Username, Password, EmployeeName, UserRole, Status) " +
-                               "VALUES (@user, @pass, @name, @role, 'Active')";
+                // កែ Query ឱ្យរក្សាទុកទាំងសិទ្ធិដែលបានធិកលើ CheckBox ចូលទៅ Database ដែរ
+                string query = "INSERT INTO tbl_Users (Username, Password, EmployeeName, UserRole, Status, CanCustomer, CanLoan, CanPenalty, CanRepayment, CanReport, CanSetting) " +
+                               "VALUES (@user, @pass, @name, @role, 'Active', @canCust, @canLoan, @canPen, @canRepay, @canRep,@canSearch, @canSet)";
 
                 SqlCommand cmd = new SqlCommand(query, Connection.conn);
 
                 cmd.Parameters.AddWithValue("@user", uitxtUserID.Text.Trim());
                 cmd.Parameters.AddWithValue("@pass", uitxtUserPassword.Text.Trim());
                 cmd.Parameters.AddWithValue("@name", uitxtUserName.Text.Trim());
-                cmd.Parameters.AddWithValue("@role", uicboUserProfile.SelectedItem.ToString());
+                cmd.Parameters.AddWithValue("@role", CboUserProfile.SelectedItem.ToString());
+
+                // បើជា master គឺឱ្យ True ទាំងអស់ បើជា user គឺយកតាមការធិកជាក់ស្តែង
+                string selectedRole = CboUserProfile.SelectedItem.ToString().ToLower().Trim();
+                if (selectedRole == "master")
+                {
+                    cmd.Parameters.AddWithValue("@canCust", true);
+                    cmd.Parameters.AddWithValue("@canLoan", true);
+                    cmd.Parameters.AddWithValue("@canPen", true);
+                    cmd.Parameters.AddWithValue("@canRepay", true);
+                    cmd.Parameters.AddWithValue("@canRep", true);
+                    cmd.Parameters.AddWithValue("@canSet", true);
+                    cmd.Parameters.AddWithValue("@canSearch", true);
+                }
+                else
+                {
+                    cmd.Parameters.AddWithValue("@canCust", ChkCustomer.Checked);
+                    cmd.Parameters.AddWithValue("@canLoan", ChkLoan.Checked);
+                    cmd.Parameters.AddWithValue("@canPen", ChkPenalty.Checked);
+                    cmd.Parameters.AddWithValue("@canRepay", ChkRepayment.Checked);
+                    cmd.Parameters.AddWithValue("@canRep", ChkReports.Checked); // ប្រកាស ChkReports តាមប្អូនសរសេរ
+                    cmd.Parameters.AddWithValue("@canSearch", ChkSearchRecords.Checked);
+                    cmd.Parameters.AddWithValue("@canSet", ChkSetting.Checked);
+                }
 
                 int result = cmd.ExecuteNonQuery();
 
@@ -163,7 +293,16 @@ namespace WinFormsApp01
                     uitxtUserID.Clear();
                     uitxtUserPassword.Clear();
                     uitxtUserName.Clear();
-                    uicboUserProfile.SelectedIndex = -1;
+                    CboUserProfile.SelectedIndex = -1;
+
+                    // Clear CheckBox
+                    ChkCustomer.Checked = false;
+                    ChkLoan.Checked = false;
+                    ChkPenalty.Checked = false;
+                    ChkRepayment.Checked = false;
+                    ChkReports.Checked = false;
+                    ChkSearchRecords.Checked = false;
+                    ChkSetting.Checked = false;
                 }
                 else
                 {
@@ -183,12 +322,370 @@ namespace WinFormsApp01
             }
         }
 
+        private void uicboUserProfile_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (CboUserProfile.SelectedItem == null) return;
+
+            string selectedProfile = CboUserProfile.SelectedItem.ToString().ToLower().Trim();
+
+            if (selectedProfile == "user")
+            {
+                GroupPermissions.Enabled = true;
+
+                // លុបការធិកចាស់ៗចោលទុកឱ្យធិកថ្មី
+                ChkCustomer.Checked = false;
+                ChkLoan.Checked = false;
+                ChkPenalty.Checked = false;
+                ChkRepayment.Checked = false;
+                ChkReports.Checked = false;
+                ChkSearchRecords.Checked = false;
+                ChkSetting.Checked = false;
+            }
+            else if (selectedProfile == "master")
+            {
+                GroupPermissions.Enabled = false;
+
+                // ធិកឱ្យទាំងអស់អូតូ
+                ChkCustomer.Checked = true;
+                ChkLoan.Checked = true;
+                ChkPenalty.Checked = true;
+                ChkRepayment.Checked = true;
+                ChkReports.Checked = true;
+                ChkSetting.Checked = true;
+                ChkSearchRecords.Checked = true;
+            }
+            else
+            {
+                GroupPermissions.Enabled = false;
+            }
+        }
+
         private void tpLogin_Click(object sender, EventArgs e) { }
         private void tpuser_acc_Click(object sender, EventArgs e) { }
+        private void uiBtnview_Click(object sender, EventArgs e) { }
+        private void tprepay_Click(object sender, EventArgs e) { }
 
-        private void tprepay_Click(object sender, EventArgs e)
+        private void BtnCaculate_Click(object sender, EventArgs e)
+        {
+            // ១. ត្រួតពិនិត្យមើលថាតើបុគ្គលិកបានរើសឈ្មោះអតិថិជនហើយឬនៅ
+            if (cboLoanCustomer.SelectedIndex == -1)
+            {
+                MessageBox.Show("សូមជ្រើសរើសអតិថិជនសិន!", "ព្រមាន", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // ២. ចាប់យកតម្លៃលេខពី TextBox នីមួយៗមកបម្លែងជាប្រភេទលេខ decimal
+            decimal loanAmount = Convert.ToDecimal(txtLoanAmount.Text);       // ប្រាក់ដើមខ្ចី
+            decimal interestRate = Convert.ToDecimal(txtLoanInterestRate.Text); // អត្រាការប្រាក់ (គិតជា %)
+            decimal months = Convert.ToDecimal(txtLoanTerm.Text);             // ចំនួនខែដែលខ្ចី
+
+            // ៣. គណនាតាមរូបមន្តកម្ចី
+            // រកប្រាក់ការសរុប = ប្រាក់ដើម x (អត្រាការប្រាក់ / 100) x ចំនួនខែ
+            decimal totalInterest = loanAmount * (interestRate / 100) * months;
+
+            // រកប្រាក់សរុបត្រូវសង = ប្រាក់ដើម + ប្រាក់ការសរុប
+            decimal totalAmount = loanAmount + totalInterest;
+
+            // ៤. បោះទិន្នន័យបង្ហាញចូលទៅក្នុង ListView (ដូចគំរូរូបភាពទី ៣)
+            int rowCount = lvLoanReport.Items.Count + 1; // រកលំដាប់លេខរៀង (No)
+
+            ListViewItem item = new ListViewItem(rowCount.ToString()); // ថែមលេខរៀងចូល Column ទី ១
+            item.SubItems.Add(cboLoanCustomer.SelectedItem.ToString()); // ថែមឈ្មោះចូល Column ទី ២
+            item.SubItems.Add(loanAmount.ToString("N2"));              // ថែមប្រាក់ដើមចូល Column ទី ៣
+            item.SubItems.Add(totalInterest.ToString("N2"));           // ថែមប្រាក់ការចូល Column ទី ៤
+            item.SubItems.Add(totalAmount.ToString("N2"));             // ថែមប្រាក់សរុបចូល Column ទី ៥
+
+            // បញ្ចូល Row ថ្មីនេះទៅក្នុង ListView
+            lvLoanReport.Items.Add(item);
+        }
+
+        private void uiTextBox1_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        private void BtnSearch_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtSearchLoanID.Text))
+            {
+                MessageBox.Show("សូមវាយបញ្ចូល Loan ID សិន!", "ដំណឹង", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed) Connection.conn.Open();
+
+                // ១. ពិនិត្យមើលក្នុង Query (ត្រូវប្រាកដថាប្រើពាក្យ @custId)
+                string query = "SELECT LoanAmount, InterestRate, (LoanAmount + (LoanAmount * (InterestRate/100) * TermMonths)) AS TotalAmount " +
+                               "FROM Loan WHERE CustomerID = @custId AND Status = 'Active'";
+
+                SqlCommand cmd = new SqlCommand(query, Connection.conn);
+
+                // ២. ពិនិត្យមើលត្រង់កន្លែងថែម Parameter (ត្រូវតែ @custId ដូចគ្នា បេះបិទ)
+                // ⚠️ ត្រូវប្រាកដថាប្អូនមិនមែនសរសេរ @loanId ឬ @custID (ID ធំ) នោះទេ
+                cmd.Parameters.AddWithValue("@custId", txtSearchLoanID.Text);
+
+                SqlDataReader reader = cmd.ExecuteReader();
+                if (reader.Read())
+                {
+                    txtLoanAmount.Text = Convert.ToDecimal(reader["LoanAmount"]).ToString("N2");
+                    txtInterestRate.Text = Convert.ToDecimal(reader["InterestRate"]).ToString("F2");
+                    txtTotalAmount.Text = Convert.ToDecimal(reader["TotalAmount"]).ToString("N2");
+                }
+                else
+                {
+                    MessageBox.Show("រកមិនឃើញទិន្នន័យកម្ចី ឬកម្ចីនេះត្រូវបានបិទរួចរាល់ហើយ!", "មិនជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    txtLoanAmount.Clear(); txtInterestRate.Clear(); txtTotalAmount.Clear();
+                }
+                reader.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Search: " + ex.Message);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open) Connection.conn.Close();
+            }
+        }
+
+
+        private void btnSaveRepayment_Click(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtPayAmount.Text) || string.IsNullOrEmpty(txtSearchLoanID.Text))
+            {
+                MessageBox.Show("សូមបំពេញព័ត៌មាន និងចំនួនទឹកប្រាក់ដែលត្រូវបង់ឱ្យបានត្រឹមត្រូវ!", "ព្រមាន", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed) Connection.conn.Open();
+
+                // ១. កូដបញ្ចូលទៅតារាង Repayment
+                string insertQuery = "INSERT INTO Repayment (LoanID, PayAmount) VALUES (@loanId, @payAmount)";
+                SqlCommand cmdInsert = new SqlCommand(insertQuery, Connection.conn);
+                cmdInsert.Parameters.AddWithValue("@loanId", txtSearchLoanID.Text);
+                cmdInsert.Parameters.AddWithValue("@payAmount", Convert.ToDecimal(txtPayAmount.Text));
+                cmdInsert.ExecuteNonQuery();
+
+                // ២. កូដកែប្រែស្ថានភាពទៅជា 'Closed' ក្នុងតារាង Loan (ឧទាហរណ៍ថាគាត់បង់ដាច់)
+                // 💡 ប្អូនអាចអភិវឌ្ឍបន្ថែមឆែកលក្ខខណ្ឌបើបង់គ្រប់ទើបដូរ Status ក៏បាន
+                string updateQuery = "UPDATE Loan SET Status = 'Closed' WHERE LoanID = @loanId";
+                SqlCommand cmdUpdate = new SqlCommand(updateQuery, Connection.conn);
+                cmdUpdate.Parameters.AddWithValue("@loanId", txtSearchLoanID.Text);
+                cmdUpdate.ExecuteNonQuery();
+
+                MessageBox.Show("រក្សាទុកការបង់ប្រាក់សងត្រឡប់បានជោគជ័យ!", "ជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                // សម្អាតប្រអប់ក្រោយរក្សាទុកជោគជ័យ
+                txtSearchLoanID.Clear(); txtLoanAmount.Clear(); txtInterestRate.Clear(); txtTotalAmount.Clear(); txtPayAmount.Clear();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error Save Repayment: " + ex.Message);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open) Connection.conn.Close();
+            }
+        }
+
+        private void ChkRepayment_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void uiRichTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            {
+                uiRichTextBox1.ReadOnly = true;
+
+                uiRichTextBox1.Text =
+            @"គោលនយោបាយកម្ចី (Loan Policy)
+
+ការប្រើប្រាស់សេវាកម្ចីប្រាក់ ត្រូវគោរពតាមលក្ខខណ្ឌខាងក្រោម៖
+
+The borrower must comply with the following terms and conditions:
+
+✓ ចំនួនកម្ចីអតិបរមា៖ $10,000
+  Maximum Loan Amount: $10,000
+
+✓ រយៈពេលកម្ចី៖ 6 ដល់ 60 ខែ
+  Loan Term: 6 to 60 Months
+
+✓ ត្រូវមានអត្តសញ្ញាណប័ណ្ណ
+  A valid National ID Card is required.
+
+✓ អត្រាការប្រាក់ចាប់ពី 1% ក្នុងមួយខែ
+  Interest Rate starts from 1% per month.
+
+✓ ត្រូវសងប្រាក់រៀងរាល់ខែ
+  Monthly repayment is required.
+
+✓ ការសងយឺតអាចមានការផាកពិន័យ
+  Late payments may result in penalty charges.
+
+✓ ព័ត៌មានអតិថិជននឹងត្រូវរក្សាជាការសម្ងាត់
+  Customer information will be kept confidential.
+
+✓ អ្នកខ្ចីត្រូវអាន និងយល់ព្រមលើលក្ខខណ្ឌទាំងអស់។
+  The borrower must read and agree to all terms and conditions before proceeding.";
+            }
+        }
+
+        private void uiCheckBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            uiCheckBox1.Enabled = uiCheckBox1.Checked;
+        }
+
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void BtnNext_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void LoadData()
+        {
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed)
+                {
+                    Connection.conn.Open();
+                }
+                MessageBox.Show("Connected Successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open)
+                {
+                    Connection.conn.Close();
+                }
+            }
+        }
+
+        private void BtnResearch_Click(object sender, EventArgs e)
+        {
+            string searchTerm = TxtSearch.Text.Trim();
+
+            // 2. Validation: If they didn't insert a customer name, block the search
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                MessageBox.Show("សូមបញ្ចូល លេខសម្គាល់អតិថិជន (Customer ID) មុនពេលស្វែងរក!", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. If they did type something, the code continues down here normally
+            string gridQuery = "SELECT * FROM Loan WHERE CustomerID LIKE @Search";
+            string totalCustomersQuery = "SELECT COUNT(DISTINCT CustomerID) FROM Loan WHERE CustomerID LIKE @Search";
+            string totalLoansQuery = "SELECT COUNT(*) FROM Loan WHERE CustomerID LIKE @Search";
+
+            // Sum query (Make sure 'Amount' matches the column name in your database)
+            string totalAmountQuery = "SELECT SUM(LoanAmount) FROM Loan WHERE CustomerID LIKE @Search";
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed)
+                {
+                    Connection.conn.Open();
+                }
+
+                // Update DataGridView
+                using (SqlCommand cmdGrid = new SqlCommand(gridQuery, Connection.conn))
+                {
+                    cmdGrid.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmdGrid);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dgvRecords.DataSource = dt;
+                }
+
+                // Update Total Customers
+                using (SqlCommand cmdCust = new SqlCommand(totalCustomersQuery, Connection.conn))
+                {
+                    cmdCust.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    TxtTotalCustomers.Text = cmdCust.ExecuteScalar()?.ToString() ?? "0";
+                }
+
+                // Update Total Loans
+                using (SqlCommand cmdLoans = new SqlCommand(totalLoansQuery, Connection.conn))
+                {
+                    cmdLoans.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    TxtTotalLoans.Text = cmdLoans.ExecuteScalar()?.ToString() ?? "0";
+                }
+
+                // 1. Declare 'result' out here first
+                object result = null;
+
+                // Update Total Amount to your custom TxtTotal textbox
+                using (SqlCommand cmdAmount = new SqlCommand(totalAmountQuery, Connection.conn))
+                {
+                    cmdAmount.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    // 2. Assign the value here (notice we removed the 'object' keyword)
+                    result = cmdAmount.ExecuteScalar();
+                }
+
+                // 3. Now this works perfectly because 'result' still exists!
+                if (result == DBNull.Value || result == null)
+                {
+                    TxtTotalAmounts.Text = "0.00";
+                }
+                else
+                {
+                    // Formats the total value nicely (e.g., 2,500.00)
+                    TxtTotalAmounts.Text = Convert.ToDecimal(result).ToString("N2");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Search failed: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open)
+                {
+                    Connection.conn.Close();
+                }
+            }
+
+
+
+
+        }
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            TxtSearch.Text = "";
+
+            // 2. Disconnect the data source so the grid goes completely blank
+            dgvRecords.DataSource = null;
+
+            // 3. Reset the totals back to zero
+            TxtTotalCustomers.Text = "0";
+            TxtTotalLoans.Text = "0";
+            TxtTotalAmounts.Text = "0.00";
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            if (uiTabControlMenu1.SelectedIndex < uiTabControlMenu1.TabCount - 1)
+            {
+                // Move down to the next menu item (+1)
+                uiTabControlMenu1.SelectedIndex = uiTabControlMenu1.SelectedIndex + 1;
+            }
+            else
+            {
+                // If it's already at the last menu item, go back to the top one (Log in)
+                uiTabControlMenu1.SelectedIndex = 0;
+            }
         }
 
         private void BtnSearch_Click(object sender, EventArgs e)
@@ -286,4 +783,4 @@ namespace WinFormsApp01
             txtAmount.Clear();
         }
     }
-}
+}   
