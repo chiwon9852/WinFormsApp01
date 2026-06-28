@@ -352,7 +352,7 @@ namespace WinFormsApp01
                 ChkRepayment.Checked = true;
                 ChkReports.Checked = true;
                 ChkSetting.Checked = true;
-                ChkSearchRecords.Checked= true;
+                ChkSearchRecords.Checked = true;
             }
             else
             {
@@ -549,5 +549,143 @@ The borrower must comply with the following terms and conditions:
         {
 
         }
+
+        private void LoadData()
+        {
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed)
+                {
+                    Connection.conn.Open();
+                }
+                MessageBox.Show("Connected Successfully!");
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open)
+                {
+                    Connection.conn.Close();
+                }
+            }
+        }
+
+        private void BtnResearch_Click(object sender, EventArgs e)
+        {
+            string searchTerm = TxtSearch.Text.Trim();
+
+            // 2. Validation: If they didn't insert a customer name, block the search
+            if (string.IsNullOrEmpty(searchTerm))
+            {
+                MessageBox.Show("សូមបញ្ចូល លេខសម្គាល់អតិថិជន (Customer ID) មុនពេលស្វែងរក!", "Input Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 3. If they did type something, the code continues down here normally
+            string gridQuery = "SELECT * FROM Loan WHERE CustomerID LIKE @Search";
+            string totalCustomersQuery = "SELECT COUNT(DISTINCT CustomerID) FROM Loan WHERE CustomerID LIKE @Search";
+            string totalLoansQuery = "SELECT COUNT(*) FROM Loan WHERE CustomerID LIKE @Search";
+
+            // Sum query (Make sure 'Amount' matches the column name in your database)
+            string totalAmountQuery = "SELECT SUM(LoanAmount) FROM Loan WHERE CustomerID LIKE @Search";
+            try
+            {
+                if (Connection.conn.State == ConnectionState.Closed)
+                {
+                    Connection.conn.Open();
+                }
+
+                // Update DataGridView
+                using (SqlCommand cmdGrid = new SqlCommand(gridQuery, Connection.conn))
+                {
+                    cmdGrid.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    SqlDataAdapter adapter = new SqlDataAdapter(cmdGrid);
+                    DataTable dt = new DataTable();
+                    adapter.Fill(dt);
+                    dgvRecords.DataSource = dt;
+                }
+
+                // Update Total Customers
+                using (SqlCommand cmdCust = new SqlCommand(totalCustomersQuery, Connection.conn))
+                {
+                    cmdCust.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    TxtTotalCustomers.Text = cmdCust.ExecuteScalar()?.ToString() ?? "0";
+                }
+
+                // Update Total Loans
+                using (SqlCommand cmdLoans = new SqlCommand(totalLoansQuery, Connection.conn))
+                {
+                    cmdLoans.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    TxtTotalLoans.Text = cmdLoans.ExecuteScalar()?.ToString() ?? "0";
+                }
+
+                // 1. Declare 'result' out here first
+                object result = null;
+
+                // Update Total Amount to your custom TxtTotal textbox
+                using (SqlCommand cmdAmount = new SqlCommand(totalAmountQuery, Connection.conn))
+                {
+                    cmdAmount.Parameters.AddWithValue("@Search", "%" + searchTerm + "%");
+                    // 2. Assign the value here (notice we removed the 'object' keyword)
+                    result = cmdAmount.ExecuteScalar();
+                }
+
+                // 3. Now this works perfectly because 'result' still exists!
+                if (result == DBNull.Value || result == null)
+                {
+                    TxtTotalAmounts.Text = "0.00";
+                }
+                else
+                {
+                    // Formats the total value nicely (e.g., 2,500.00)
+                    TxtTotalAmounts.Text = Convert.ToDecimal(result).ToString("N2");
+                }
+            }
+            catch (SqlException ex)
+            {
+                MessageBox.Show($"Search failed: {ex.Message}", "Database Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            finally
+            {
+                if (Connection.conn.State == ConnectionState.Open)
+                {
+                    Connection.conn.Close();
+                }
+            }
+
+
+
+
+        }
+
+        private void BtnRefresh_Click(object sender, EventArgs e)
+        {
+            TxtSearch.Text = "";
+
+            // 2. Disconnect the data source so the grid goes completely blank
+            dgvRecords.DataSource = null;
+
+            // 3. Reset the totals back to zero
+            TxtTotalCustomers.Text = "0";
+            TxtTotalLoans.Text = "0";
+            TxtTotalAmounts.Text = "0.00";
+        }
+
+        private void BtnBack_Click(object sender, EventArgs e)
+        {
+            if (uiTabControlMenu1.SelectedIndex < uiTabControlMenu1.TabCount - 1)
+            {
+                // Move down to the next menu item (+1)
+                uiTabControlMenu1.SelectedIndex = uiTabControlMenu1.SelectedIndex + 1;
+            }
+            else
+            {
+                // If it's already at the last menu item, go back to the top one (Log in)
+                uiTabControlMenu1.SelectedIndex = 0;
+            }
+        }
     }
-}
+}   

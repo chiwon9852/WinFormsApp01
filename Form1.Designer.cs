@@ -28,6 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             tpSetting = new TabPage();
             tpPenalty = new TabPage();
@@ -59,6 +64,7 @@
             uiTabControlMenu1 = new Sunny.UI.UITabControlMenu();
             tpuser_acc = new TabPage();
             GroupPermissions = new Sunny.UI.UIGroupBox();
+            ChkSearchRecords = new Sunny.UI.UICheckBox();
             ChkSetting = new Sunny.UI.UICheckBox();
             ChkReports = new Sunny.UI.UICheckBox();
             ChkRepayment = new Sunny.UI.UICheckBox();
@@ -92,7 +98,19 @@
             txtPayAmount = new Sunny.UI.UITextBox();
             txtSearchLoanID = new Sunny.UI.UITextBox();
             tpSearchRecords = new TabPage();
-            ChkSearchRecords = new Sunny.UI.UICheckBox();
+            dgvRecords = new Sunny.UI.UIDataGridView();
+            BtnResearch = new Sunny.UI.UIButton();
+            BtnRefresh = new Sunny.UI.UIButton();
+            BtnBack = new Sunny.UI.UIButton();
+            TxtTotalAmounts = new Sunny.UI.UITextBox();
+            TxtTotalCustomers = new Sunny.UI.UITextBox();
+            TxtTotalLoans = new Sunny.UI.UITextBox();
+            TxtSearch = new Sunny.UI.UITextBox();
+            LblTotalAmounts = new Sunny.UI.UILabel();
+            LblTotalLoans = new Sunny.UI.UILabel();
+            LblTotalCustomers = new Sunny.UI.UILabel();
+            LblSearch = new Sunny.UI.UILabel();
+            uiPanel1 = new Sunny.UI.UIPanel();
             tpReports.SuspendLayout();
             uiRichTextBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -102,6 +120,8 @@
             tpuser_acc.SuspendLayout();
             GroupPermissions.SuspendLayout();
             tpRepayment.SuspendLayout();
+            tpSearchRecords.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).BeginInit();
             SuspendLayout();
             // 
             // tpSetting
@@ -525,6 +545,18 @@
             GroupPermissions.TabIndex = 13;
             GroupPermissions.Text = "User Permissions";
             GroupPermissions.TextAlignment = ContentAlignment.MiddleLeft;
+            // 
+            // ChkSearchRecords
+            // 
+            ChkSearchRecords.CheckBoxColor = Color.White;
+            ChkSearchRecords.Font = new Font("Microsoft Sans Serif", 12F);
+            ChkSearchRecords.ForeColor = Color.White;
+            ChkSearchRecords.Location = new Point(29, 325);
+            ChkSearchRecords.MinimumSize = new Size(1, 1);
+            ChkSearchRecords.Name = "ChkSearchRecords";
+            ChkSearchRecords.Size = new Size(188, 36);
+            ChkSearchRecords.TabIndex = 6;
+            ChkSearchRecords.Text = "Search Records";
             // 
             // ChkSetting
             // 
@@ -967,6 +999,19 @@
             // 
             // tpSearchRecords
             // 
+            tpSearchRecords.Controls.Add(dgvRecords);
+            tpSearchRecords.Controls.Add(BtnResearch);
+            tpSearchRecords.Controls.Add(BtnRefresh);
+            tpSearchRecords.Controls.Add(BtnBack);
+            tpSearchRecords.Controls.Add(TxtTotalAmounts);
+            tpSearchRecords.Controls.Add(TxtTotalCustomers);
+            tpSearchRecords.Controls.Add(TxtTotalLoans);
+            tpSearchRecords.Controls.Add(TxtSearch);
+            tpSearchRecords.Controls.Add(LblTotalAmounts);
+            tpSearchRecords.Controls.Add(LblTotalLoans);
+            tpSearchRecords.Controls.Add(LblTotalCustomers);
+            tpSearchRecords.Controls.Add(LblSearch);
+            tpSearchRecords.Controls.Add(uiPanel1);
             tpSearchRecords.Location = new Point(201, 0);
             tpSearchRecords.Name = "tpSearchRecords";
             tpSearchRecords.Size = new Size(837, 453);
@@ -974,17 +1019,208 @@
             tpSearchRecords.Text = "Search Records";
             tpSearchRecords.UseVisualStyleBackColor = true;
             // 
-            // ChkSearchRecords
+            // dgvRecords
             // 
-            ChkSearchRecords.CheckBoxColor = Color.White;
-            ChkSearchRecords.Font = new Font("Microsoft Sans Serif", 12F);
-            ChkSearchRecords.ForeColor = Color.White;
-            ChkSearchRecords.Location = new Point(29, 325);
-            ChkSearchRecords.MinimumSize = new Size(1, 1);
-            ChkSearchRecords.Name = "ChkSearchRecords";
-            ChkSearchRecords.Size = new Size(188, 36);
-            ChkSearchRecords.TabIndex = 6;
-            ChkSearchRecords.Text = "Search Records";
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(235, 243, 255);
+            dgvRecords.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dgvRecords.BackgroundColor = Color.White;
+            dgvRecords.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle2.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle2.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
+            dgvRecords.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
+            dgvRecords.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = SystemColors.Window;
+            dataGridViewCellStyle3.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle3.ForeColor = SystemColors.ControlText;
+            dataGridViewCellStyle3.SelectionBackColor = SystemColors.Highlight;
+            dataGridViewCellStyle3.SelectionForeColor = SystemColors.HighlightText;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.False;
+            dgvRecords.DefaultCellStyle = dataGridViewCellStyle3;
+            dgvRecords.EnableHeadersVisualStyles = false;
+            dgvRecords.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvRecords.GridColor = Color.FromArgb(80, 160, 255);
+            dgvRecords.Location = new Point(31, 151);
+            dgvRecords.Name = "dgvRecords";
+            dgvRecords.RectColor = Color.Maroon;
+            dgvRecords.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(235, 243, 255);
+            dataGridViewCellStyle4.Font = new Font("Microsoft Sans Serif", 12F);
+            dataGridViewCellStyle4.ForeColor = Color.FromArgb(48, 48, 48);
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(80, 160, 255);
+            dataGridViewCellStyle4.SelectionForeColor = Color.White;
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.True;
+            dgvRecords.RowHeadersDefaultCellStyle = dataGridViewCellStyle4;
+            dgvRecords.RowHeadersWidth = 51;
+            dataGridViewCellStyle5.BackColor = Color.White;
+            dataGridViewCellStyle5.Font = new Font("Microsoft Sans Serif", 12F);
+            dgvRecords.RowsDefaultCellStyle = dataGridViewCellStyle5;
+            dgvRecords.SelectedIndex = -1;
+            dgvRecords.Size = new Size(778, 103);
+            dgvRecords.StripeOddColor = Color.FromArgb(235, 243, 255);
+            dgvRecords.TabIndex = 6;
+            // 
+            // BtnResearch
+            // 
+            BtnResearch.FillColor = Color.Maroon;
+            BtnResearch.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnResearch.Location = new Point(624, 94);
+            BtnResearch.MinimumSize = new Size(1, 1);
+            BtnResearch.Name = "BtnResearch";
+            BtnResearch.Size = new Size(185, 36);
+            BtnResearch.TabIndex = 3;
+            BtnResearch.Text = "Search";
+            BtnResearch.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            BtnResearch.Click += BtnResearch_Click;
+            // 
+            // BtnRefresh
+            // 
+            BtnRefresh.FillColor = Color.Maroon;
+            BtnRefresh.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnRefresh.Location = new Point(38, 363);
+            BtnRefresh.MinimumSize = new Size(1, 1);
+            BtnRefresh.Name = "BtnRefresh";
+            BtnRefresh.RectColor = Color.LightCoral;
+            BtnRefresh.Size = new Size(134, 44);
+            BtnRefresh.TabIndex = 4;
+            BtnRefresh.Text = "Refresh";
+            BtnRefresh.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            BtnRefresh.Click += BtnRefresh_Click;
+            // 
+            // BtnBack
+            // 
+            BtnBack.FillColor = Color.Maroon;
+            BtnBack.Font = new Font("Microsoft Sans Serif", 12F);
+            BtnBack.Location = new Point(684, 363);
+            BtnBack.MinimumSize = new Size(1, 1);
+            BtnBack.Name = "BtnBack";
+            BtnBack.RectColor = Color.LightCoral;
+            BtnBack.Size = new Size(125, 44);
+            BtnBack.TabIndex = 5;
+            BtnBack.Text = "Back";
+            BtnBack.TipsFont = new Font("Microsoft Sans Serif", 9F);
+            BtnBack.Click += BtnBack_Click;
+            // 
+            // TxtTotalAmounts
+            // 
+            TxtTotalAmounts.Font = new Font("Microsoft Sans Serif", 12F);
+            TxtTotalAmounts.Location = new Point(709, 291);
+            TxtTotalAmounts.Margin = new Padding(4, 5, 4, 5);
+            TxtTotalAmounts.MinimumSize = new Size(1, 16);
+            TxtTotalAmounts.Name = "TxtTotalAmounts";
+            TxtTotalAmounts.Padding = new Padding(5);
+            TxtTotalAmounts.RectColor = Color.Firebrick;
+            TxtTotalAmounts.ShowText = false;
+            TxtTotalAmounts.Size = new Size(100, 36);
+            TxtTotalAmounts.TabIndex = 3;
+            TxtTotalAmounts.TextAlignment = ContentAlignment.MiddleLeft;
+            TxtTotalAmounts.Watermark = "";
+            // 
+            // TxtTotalCustomers
+            // 
+            TxtTotalCustomers.Font = new Font("Microsoft Sans Serif", 12F);
+            TxtTotalCustomers.Location = new Point(207, 291);
+            TxtTotalCustomers.Margin = new Padding(4, 5, 4, 5);
+            TxtTotalCustomers.MinimumSize = new Size(1, 16);
+            TxtTotalCustomers.Name = "TxtTotalCustomers";
+            TxtTotalCustomers.Padding = new Padding(5);
+            TxtTotalCustomers.RectColor = Color.Maroon;
+            TxtTotalCustomers.ShowText = false;
+            TxtTotalCustomers.Size = new Size(57, 36);
+            TxtTotalCustomers.TabIndex = 3;
+            TxtTotalCustomers.TextAlignment = ContentAlignment.MiddleLeft;
+            TxtTotalCustomers.Watermark = "";
+            // 
+            // TxtTotalLoans
+            // 
+            TxtTotalLoans.Font = new Font("Microsoft Sans Serif", 12F);
+            TxtTotalLoans.Location = new Point(437, 291);
+            TxtTotalLoans.Margin = new Padding(4, 5, 4, 5);
+            TxtTotalLoans.MinimumSize = new Size(1, 16);
+            TxtTotalLoans.Name = "TxtTotalLoans";
+            TxtTotalLoans.Padding = new Padding(5);
+            TxtTotalLoans.RectColor = Color.Maroon;
+            TxtTotalLoans.ShowText = false;
+            TxtTotalLoans.Size = new Size(60, 36);
+            TxtTotalLoans.TabIndex = 3;
+            TxtTotalLoans.TextAlignment = ContentAlignment.MiddleLeft;
+            TxtTotalLoans.Watermark = "";
+            // 
+            // TxtSearch
+            // 
+            TxtSearch.Font = new Font("Microsoft Sans Serif", 12F);
+            TxtSearch.Location = new Point(238, 94);
+            TxtSearch.Margin = new Padding(4, 5, 4, 5);
+            TxtSearch.MinimumSize = new Size(1, 16);
+            TxtSearch.Name = "TxtSearch";
+            TxtSearch.Padding = new Padding(5);
+            TxtSearch.RectColor = Color.Maroon;
+            TxtSearch.ShowText = false;
+            TxtSearch.Size = new Size(360, 36);
+            TxtSearch.TabIndex = 5;
+            TxtSearch.TextAlignment = ContentAlignment.MiddleLeft;
+            TxtSearch.Watermark = "";
+            // 
+            // LblTotalAmounts
+            // 
+            LblTotalAmounts.Font = new Font("Microsoft Sans Serif", 12F);
+            LblTotalAmounts.ForeColor = Color.FromArgb(48, 48, 48);
+            LblTotalAmounts.Location = new Point(541, 298);
+            LblTotalAmounts.Name = "LblTotalAmounts";
+            LblTotalAmounts.Size = new Size(190, 29);
+            LblTotalAmounts.TabIndex = 4;
+            LblTotalAmounts.Text = "Total Amounts:";
+            // 
+            // LblTotalLoans
+            // 
+            LblTotalLoans.Font = new Font("Microsoft Sans Serif", 12F);
+            LblTotalLoans.ForeColor = Color.FromArgb(48, 48, 48);
+            LblTotalLoans.Location = new Point(305, 298);
+            LblTotalLoans.Name = "LblTotalLoans";
+            LblTotalLoans.Size = new Size(125, 29);
+            LblTotalLoans.TabIndex = 3;
+            LblTotalLoans.Text = "Total Loans:";
+            // 
+            // LblTotalCustomers
+            // 
+            LblTotalCustomers.Font = new Font("Microsoft Sans Serif", 12F);
+            LblTotalCustomers.ForeColor = Color.FromArgb(48, 48, 48);
+            LblTotalCustomers.Location = new Point(31, 298);
+            LblTotalCustomers.Name = "LblTotalCustomers";
+            LblTotalCustomers.Size = new Size(169, 29);
+            LblTotalCustomers.TabIndex = 2;
+            LblTotalCustomers.Text = "Total Customers:";
+            // 
+            // LblSearch
+            // 
+            LblSearch.Font = new Font("Microsoft Sans Serif", 12F);
+            LblSearch.ForeColor = Color.FromArgb(48, 48, 48);
+            LblSearch.Location = new Point(31, 101);
+            LblSearch.Name = "LblSearch";
+            LblSearch.Size = new Size(200, 29);
+            LblSearch.TabIndex = 1;
+            LblSearch.Text = "Search Customer:";
+            // 
+            // uiPanel1
+            // 
+            uiPanel1.FillColor = Color.Firebrick;
+            uiPanel1.Font = new Font("Microsoft Sans Serif", 12F);
+            uiPanel1.ForeColor = Color.White;
+            uiPanel1.Location = new Point(0, 0);
+            uiPanel1.Margin = new Padding(4, 5, 4, 5);
+            uiPanel1.MinimumSize = new Size(1, 1);
+            uiPanel1.Name = "uiPanel1";
+            uiPanel1.RectColor = Color.Red;
+            uiPanel1.Size = new Size(837, 56);
+            uiPanel1.TabIndex = 0;
+            uiPanel1.Text = "LOAN RECORDS";
+            uiPanel1.TextAlignment = ContentAlignment.MiddleCenter;
             // 
             // Form1
             // 
@@ -1005,6 +1241,8 @@
             tpuser_acc.ResumeLayout(false);
             GroupPermissions.ResumeLayout(false);
             tpRepayment.ResumeLayout(false);
+            tpSearchRecords.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvRecords).EndInit();
             ResumeLayout(false);
         }
 
@@ -1074,5 +1312,18 @@
         private Sunny.UI.UILabel LblTitle;
         private TabPage tpSearchRecords;
         private Sunny.UI.UICheckBox ChkSearchRecords;
+        private Sunny.UI.UIPanel uiPanel1;
+        private Sunny.UI.UIButton BtnBack;
+        private Sunny.UI.UITextBox TxtTotalAmounts;
+        private Sunny.UI.UIButton BtnRefresh;
+        private Sunny.UI.UIButton BtnResearch;
+        private Sunny.UI.UITextBox TxtTotalCustomers;
+        private Sunny.UI.UITextBox TxtTotalLoans;
+        private Sunny.UI.UITextBox TxtSearch;
+        private Sunny.UI.UILabel LblTotalAmounts;
+        private Sunny.UI.UILabel LblTotalLoans;
+        private Sunny.UI.UILabel LblTotalCustomers;
+        private Sunny.UI.UILabel LblSearch;
+        private Sunny.UI.UIDataGridView dgvRecords;
     }
 }
