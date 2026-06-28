@@ -145,7 +145,7 @@ namespace WinFormsApp01
                     {
                         uiTabControlMenu1.TabPages.Add(tab);
                     }
-                    else if (tab.Name == "tpSearchRecords" && UserSession.CanSetting)
+                    else if (tab.Name == "tpSearchRecords" && UserSession.CanSearch)
                     {
                         uiTabControlMenu1.TabPages.Add(tab);
                     }
@@ -204,7 +204,7 @@ namespace WinFormsApp01
                     UserSession.CanPenalty = reader["CanPenalty"] != DBNull.Value && Convert.ToBoolean(reader["CanPenalty"]);
                     UserSession.CanRepayment = reader["CanRepayment"] != DBNull.Value && Convert.ToBoolean(reader["CanRepayment"]);
                     UserSession.CanReport = reader["CanReport"] != DBNull.Value && Convert.ToBoolean(reader["CanReport"]);
-                    UserSession.CanSearch = reader["canSearch"] != DBNull.Value && Convert.ToBoolean(reader["canSearch"]);
+                    UserSession.CanSearch = reader["CanSearch"] != DBNull.Value && Convert.ToBoolean(reader["CanSearch"]);
                     UserSession.CanSetting = reader["CanSetting"] != DBNull.Value && Convert.ToBoolean(reader["CanSetting"]);
 
                     MessageBox.Show("ឡុកអ៊ីនចូលប្រព័ន្ធជោគជ័យ!", "ជោគជ័យ", MessageBoxButtons.OK, MessageBoxIcon.Information);
